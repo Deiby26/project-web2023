@@ -3,7 +3,7 @@
       <h1>Mis Cartas</h1>
       
       <!-- Botón para abrir el diálogo -->
-      <button @click="openEditDialog">Editar</button>
+      <nuxt-link to="/CardPage">Crear nueva carta</nuxt-link>
   
       <!-- Diálogo de edición -->
       <div class="edit-dialog" v-if="isEditDialogOpen">
