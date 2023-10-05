@@ -27,7 +27,7 @@
         </div>
     </center>
 </template>
-  
+
 <script>
 export default {
     data() {

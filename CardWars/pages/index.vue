@@ -1,16 +1,16 @@
 <template>
   <center>
-    <h1>Welcome to CardWars</h1>
+    <h1 id="Welcome">Welcome to CardWars</h1>
     <br>
-    <p>A place where your ideas can be brought to life</p>
+    <p id="Subtittle">A place where your ideas can be brought to life</p>
     <br>
-    <nuxt-link to="/Login">Go to Login</nuxt-link>
-    <br>
-    <br>
-    <nuxt-link to="/SignUp">Sign up</nuxt-link>
+    <nuxt-link to="/Login" id="Got-To-Login">Go to Login</nuxt-link>
     <br>
     <br>
-    <nuxt-link to="/CardPage">Create a card</nuxt-link>
+    <nuxt-link to="/SignUp" id="Sign-Up">Sign up</nuxt-link>
+    <br>
+    <br>
+    <nuxt-link to="/CardPage" id="Create-Card">Create a card</nuxt-link>
   </center>
 </template>
 
@@ -24,4 +24,56 @@ export default {
     };
   },
 };
+
+definePageMeta({
+  layout: "blank",
+});
 </script>
+
+<style>
+body{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images4.alphacoders.com/120/1205937.jpg);
+  background-repeat: no-repeat;
+  background-size: 107%;
+  background-attachment: fixed;
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+}
+
+#Welcome{
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  line-height: 300px
+}
+
+#Subtittle{
+  font-family: sans-serif;
+  color: white;
+  margin-top: -150px;
+  text-align: center;
+  line-height: 50px
+}
+
+#Got-To-Login{
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+}
+
+#Sign-Up{
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+}
+
+#Create-Card{
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  }
+</style>

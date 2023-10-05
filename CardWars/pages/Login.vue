@@ -4,13 +4,13 @@
       <div class="col-2">
         <form>
           <br>
-          <p>USERNAME</p>
+          <p id="Username">USERNAME</p>
           <input type="text" placeholder="Your Username here" v-model="username" required>
-          <p>EMAIL  ADDRESS</p>
+          <p id="Email-Address">EMAIL  ADDRESS</p>
           <input type="email" placeholder="Your Email here" v-model="email" required>
-          <p>PASSWORD</p>
+          <p id="Password">PASSWORD</p>
           <input type="password" placeholder="Password here" v-model="password" required>
-          <button type="submit">Login</button>
+          <button type="submit" id="Login">Login</button>
         </form>
       </div>
     </div>
@@ -28,3 +28,25 @@ export default {
   },
 };
 </script>
+
+<style>
+#Username{
+  font-family: sans-serif;
+  color: white;
+}
+
+#Email-Address{
+  font-family: sans-serif;
+  color: white;
+}
+
+#Password{
+  font-family: sans-serif;
+  color: white;
+}
+
+#Login{
+  font-family: sans-serif;
+  color: white;
+}
+</style>
