@@ -5,17 +5,17 @@
             <br>
             <br>
             <card-creator />
+            <nuxt-link to="/MyCardsPage">Ver Mis Cartas</nuxt-link>
         </div>
     </center>
 </template>
   
 <script>
-import CardCreator from './CardCreator.vue';
+import CardCreator from '~/components/CardCreator.vue';
 
 export default {
-    components: {
-        CardCreator
-    }
+  components: {
+    CardCreator
+  }
 };
 </script>
-  
