@@ -90,6 +90,12 @@ export default {
   margin-right: 10px;
 }
 
+button{
+    background-color: white;
+    width: 100px;
+    height: 30px;
+  }
+
 .edit-dialog {
   position: fixed;
   top: 50%;

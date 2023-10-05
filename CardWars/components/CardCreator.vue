@@ -75,6 +75,16 @@
     margin-bottom: 20px;
   }
   
+  input[type="color"] {
+    width: 50px;
+    height: 35px;
+    border-color: antiquewhite;
+    background-color: white;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: grab;
+  }
   .font-picker {
     margin-bottom: 20px;
   }
@@ -91,6 +101,29 @@
     height: 100px;
     padding: 10px;
     margin-bottom: 20px;
+  }
+
+  select {
+    width: 20%;
+    height: 30px;
+    border: 1px solid #6cb2c6;
+    border-radius: 5%;
+    padding: 5px;
+    cursor: grab;
+  }
+
+  option {
+    background-color: white;
+    color: black;
+  }
+  option:hover {
+    background-color: #e2e2e2;
+  }
+
+  button{
+    background-color: white;
+    width: 20%;
+    height: 30px;
   }
   </style>
   
