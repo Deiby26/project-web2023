@@ -18,11 +18,13 @@
     </div>
 
     <!-- Mostrar cartas aquí -->
-    <div v-for="(card, index) in savedCards" :key="index" class="card"
-      :style="{ backgroundColor: card.backgroundColor, fontFamily: card.font }">
-      {{ card.content }}
-      <button @click="openEditDialog(index)">Editar</button>
-      <button @click="deleteCard(index)">Eliminar</button>
+    <div class="card-container">
+      <div v-for="(card, index) in savedCards" :key="index" class="card"
+        :style="{ backgroundColor: card.backgroundColor, fontFamily: card.font }">
+        <div class="card-content">{{ card.content }}</div>
+        <button @click="openEditDialog(index)">Editar</button>
+        <button @click="deleteCard(index)">Eliminar</button>
+      </div>
     </div>
   </div>
 </template>
@@ -83,18 +85,31 @@ export default {
 
 <style scoped>
 .card {
-  display: inline-block;
+  width: 25%;
+  display: block;
   padding: 20px;
   border: 1px solid #ccc;
-  margin-top: 20px;
-  margin-right: 10px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-button{
-    background-color: white;
-    width: 100px;
-    height: 30px;
-  }
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  background-color: white;
+  width: 100px;
+  height: 30px;
+}
+
+.card-content {
+  word-break: break-all;
+}
 
 .edit-dialog {
   position: fixed;
@@ -108,14 +123,14 @@ button{
   z-index: 9999;
 }
 
-#Mis-Cartas{
+#Mis-Cartas {
   font-family: sans-serif;
   color: white;
   text-align: center;
   margin-top: 130px;
 }
 
-#Crear-Nueva-Carta{
+#Crear-Nueva-Carta {
   font-family: sans-serif;
   color: white;
   display: flex;
@@ -123,5 +138,4 @@ button{
   align-items: center;
   margin-top: 30px;
 }
-
 </style>
