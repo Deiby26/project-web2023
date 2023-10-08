@@ -8,22 +8,39 @@
     <!-- Diálogo de edición -->
     <div class="edit-dialog" v-if="isEditDialogOpen">
       <h2>Editar Carta</h2>
-      <textarea v-model="editedCardContent"></textarea>
-      <input type="color" v-model="editedCardColor" />
-      <select v-model="editedCardFont">
-        <option v-for="font in availableFonts" :key="font" :value="font">{{ font }}</option>
-      </select>
-      <button @click="saveEditedCard">Guardar</button>
-      <button @click="closeEditDialog">Cancelar</button>
+      <div class="form-group">
+        <label for="editedCardContent">Contenido:</label>
+        <textarea id="editedCardContent" v-model="editedCardContent"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="editedCardColor">Color:</label>
+        <input type="color" id="editedCardColor" class="color-input" v-model="editedCardColor" />
+      </div>
+      <div class="form-group">
+        <label for="editedCardFont">Fuente:</label>
+        <select id="editedCardFont" v-model="editedCardFont">
+          <option v-for="font in availableFonts" :key="font" :value="font">{{ font }}</option>
+        </select>
+      </div>
+      <div class="buttons">
+        <button @click="saveEditedCard">Guardar</button>
+        <button @click="closeEditDialog">Cancelar</button>
+      </div>
     </div>
 
     <!-- Mostrar cartas aquí -->
     <div class="card-container">
-      <div v-for="(card, index) in savedCards" :key="index" class="card"
-        :style="{ backgroundColor: card.backgroundColor, fontFamily: card.font }">
-        <div class="card-content">{{ card.content }}</div>
-        <button @click="openEditDialog(index)">Editar</button>
-        <button @click="deleteCard(index)">Eliminar</button>
+      <div v-for="(card, index) in savedCards" :key="index" class="card-container-single">
+        <div class="card" :style="{ backgroundColor: card.backgroundColor, fontFamily: card.font }">
+          <div class="card-content">{{ card.content }}</div>
+          <a @click="toggleCardButtons(index)">
+            <img src="@/assets/icons/more-info.png" alt="More Info" class="more-info-icon" />
+          </a>
+        </div>
+        <div v-if="card.showButtons" class="card-button-container">
+          <button class="edit-button" @click="openEditDialog(index)">Editar</button>
+          <button class="delete-button" @click="deleteCard(index)">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -78,23 +95,15 @@ export default {
         }
         this.closeEditDialog();
       }
-    }
+    },
+    toggleCardButtons(index) {
+      this.savedCards[index].showButtons = !this.savedCards[index].showButtons;
+    },
   }
 };
 </script>
 
 <style scoped>
-.card {
-  width: 25%;
-  display: block;
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .card-container {
   display: flex;
   flex-direction: column;
@@ -137,5 +146,109 @@ button {
   justify-content: center;
   align-items: center;
   margin-top: 30px;
+}
+
+.card-container-single {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  /* Ajusta según necesites */
+}
+
+.card {
+  width: 300px;
+  /* Ancho fijo de la carta */
+  padding: 20px;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-buttons {
+  margin-left: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.card-buttons button {
+  margin-top: 1px;
+  /* Espacio entre los botones */
+  width: 100px;
+  /* Ancho fijo de los botones */
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+textarea,
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.color-input {
+  height: 40px;
+  /* Ajusta la altura según tus preferencias */
+}
+
+.buttons button {
+  margin-right: 10px;
+}
+
+.card-button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-button-container button.edit-button,
+.card-button-container button.delete-button {
+  margin-left: 20px;
+  margin-left: 2px;
+  border: none;
+  background-color: #4caf50; 
+  color: #fff; 
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 4px;
+  outline: none;
+}
+
+.card-button-container button.delete-button {
+  background-color: #f44336; /* Color rojo */
+}
+
+.card-button-container button.edit-button:hover,
+.card-button-container button.delete-button:hover {
+  background-color: #7e9e7f; /* Color verde más oscuro */
+  transform: scale(1.05); /* Efecto de escala al hacer hover */
+}
+
+
+.more-info-icon {
+  cursor: pointer;
+  width: 50px; /* Tamaño personalizado */
+  height: 50px; /* Tamaño personalizado */
+  transition: transform 0.3s;
+  
+}
+
+.more-info-icon:hover {
+  transform: scale(1.1); /* Efecto de escala al hacer hover */
 }
 </style>
