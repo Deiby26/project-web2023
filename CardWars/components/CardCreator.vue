@@ -1,130 +1,151 @@
 <template>
-    <center>
-      <div>
-        <div class="color-picker">
-          <h3>Select Color:</h3>
-          <input type="color" v-model="selectedColor" />
-        </div>
-  
-        <div class="font-picker">
-          <h3>Select Font:</h3>
-          <select v-model="selectedFont">
-            <option v-for="font in availableFonts" :key="font" :value="font">{{ font }}</option>
-          </select>
-        </div>
-  
-        <textarea v-model="cardContent" placeholder="Enter your card content"></textarea>
-        <br>
-        <br>
-        <button @click="createCard">Create Card</button>
-        <br>
-        <br>
-        <div v-if="cardCreated" class="card" :style="cardStyle">{{ cardContent }}</div>
-        <br>
-        <br>
-        <button @click="saveCard">Save Card</button>
+  <center>
+    <div class="card-creator">
+      <div class="color-picker">
+        <h3>Select Color:</h3>
+        <input type="color" v-model="selectedColor" />
       </div>
-    </center>
-  </template>
-  
-  <script>
-  export default {
-    data() {
+
+      <div class="font-picker">
+        <h3>Select Font:</h3>
+        <select v-model="selectedFont">
+          <option v-for="font in availableFonts" :key="font" :value="font">{{ font }}</option>
+        </select>
+      </div>
+
+      <textarea v-model="cardContent" placeholder="Enter your card content"></textarea>
+
+      <button @click="createCard" class="create-button">Create Card</button>
+
+      <div v-if="cardCreated" class="card" :style="cardStyle">{{ cardContent }}</div>
+
+      <button @click="saveCard" class="save-button">Save Card</button>
+    </div>
+  </center>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      selectedColor: '#ffffff',
+      selectedFont: 'Arial, sans-serif',
+      cardContent: '',
+      cardCreated: false,
+      availableFonts: ['Arial, sans-serif', 'Times New Roman', 'Courier New']
+    };
+  },
+  computed: {
+    cardStyle() {
       return {
-        selectedColor: '#ffffff',
-        selectedFont: 'Arial, sans-serif',
-        cardContent: '',
-        cardCreated: false,
-        availableFonts: ['Arial, sans-serif', 'Times New Roman', 'Courier New']
+        backgroundColor: this.selectedColor,
+        fontFamily: this.selectedFont,
+        padding: '20px',
+        border: '1px solid #ccc'
       };
-    },
-    computed: {
-      cardStyle() {
-        return {
-          backgroundColor: this.selectedColor,
-          fontFamily: this.selectedFont,
-          padding: '20px',
-          border: '1px solid #ccc'
-        };
-      }
-    },
-    methods: {
-      createCard() {
-        this.cardCreated = true;
-      },
-  
-      saveCard() {
-        const cardData = {
-          backgroundColor: this.selectedColor,
-          font: this.selectedFont,
-          content: this.cardContent
-        };
-  
-        const savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
-        savedCards.push(cardData);
-        localStorage.setItem('savedCards', JSON.stringify(savedCards));
-  
-        alert('La carta ha sido guardada correctamente.');
-      }
     }
-  };
-  </script>
-  
-  <style scoped>
-  .color-picker {
-    margin-bottom: 20px;
+  },
+  methods: {
+    createCard() {
+      this.cardCreated = true;
+    },
+
+    saveCard() {
+      const cardData = {
+        backgroundColor: this.selectedColor,
+        font: this.selectedFont,
+        content: this.cardContent
+      };
+
+      const savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
+      savedCards.push(cardData);
+      localStorage.setItem('savedCards', JSON.stringify(savedCards));
+
+      alert('La carta ha sido guardada correctamente.');
+    }
   }
-  
-  input[type="color"] {
-    width: 50px;
+};
+</script>
+
+<style scoped>
+.card-creator {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #cccccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px;
+}
+
+.color-picker,
+.font-picker,
+.card-content,
+.card-buttons {
+  margin-bottom: 20px;
+}
+
+input[type="color"],
+select,
+textarea,
+button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+input[type="color"]{
     height: 35px;
-    border-color: antiquewhite;
-    background-color: white;
-    outline: none;
     padding: 0;
-    margin: 0;
     cursor: grab;
-  }
-  .font-picker {
-    margin-bottom: 20px;
-  }
-  
-  .card {
-    display: inline-block;
-    padding: 20px;
-    border: 1px solid #ccc;
-    margin-top: 20px;
-  }
-  
-  textarea {
-    width: 100%;
-    height: 100px;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
+}
 
-  select {
-    width: 20%;
-    height: 30px;
-    border: 1px solid #6cb2c6;
-    border-radius: 5%;
-    padding: 5px;
-    cursor: grab;
-  }
+button {
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
 
-  option {
-    background-color: white;
-    color: black;
-  }
-  option:hover {
-    background-color: #e2e2e2;
-  }
+button:hover {
+  background-color: #617562;
+}
 
-  button{
-    background-color: white;
-    width: 20%;
-    height: 30px;
-  }
-  </style>
-  
-  
+h3 {
+  font-size: larger;
+  color: hsl(0, 0%, 0%);
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.col-2 {
+  flex-basis: 50%;
+  flex-grow: 1;
+  padding: 50px 80px;
+}
+
+
+.create-button {
+  background-color: #28a745; /* Cambia el color para el botón "Create" */
+}
+
+.save-button {
+  background-color: #007bff; /* Cambia el color para el botón "Save" */
+}
+
+form button:hover {
+  transform: translateY(-5px);
+}
+</style>

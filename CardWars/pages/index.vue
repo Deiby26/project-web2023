@@ -10,7 +10,10 @@
     <nuxt-link to="/SignUp" id="Sign-Up">Sign up</nuxt-link>
     <br>
     <br>
-    <nuxt-link to="/CardPage" id="Create-Card">Create a card</nuxt-link>
+    <nuxt-link to="/CardPage" id="Create-Card">Create a personalized text</nuxt-link>
+    <br>
+    <br>
+    <nuxt-link to="/MemePage" id="Create-Meme">Create a Meme card</nuxt-link>
   </center>
 </template>
 
@@ -71,6 +74,13 @@ body{
 }
 
 #Create-Card{
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  }
+
+#Create-Meme{
   font-family: sans-serif;
   color: white;
   text-align: center;
