@@ -4,15 +4,20 @@
       <div class="col-2">
         <form @submit="submitForm">
           <br>
-          <p>USERNAME</p>
+          <p style="color: aliceblue;">USERNAME</p>
           <input type="text" placeholder="Create your Username here" v-model="username" required>
-          <p>EMAIL ADDRESS</p>
+          <p style="color: aliceblue;">EMAIL ADDRESS</p>
           <input type="email" placeholder="Type your Email here" v-model="email" required>
-          <p>PASSWORD</p>
+          <p style="color: aliceblue;" >PASSWORD</p>
           <input type="password" placeholder="Create your Password here" v-model="password" required>
-          <p>PASSWORD CONFIRM</p>
+          <p style="color: aliceblue;" >PASSWORD CONFIRM</p>
           <input type="password" placeholder="Confirm your Password here" v-model="password2" required>
+          <input type="checkbox" id="cbox2" value="second_checkbox" required/>
+          <label for="cbox2" style="color: aliceblue;">Tratamiento de Datos personales</label>
+          <br>
           <button type="submit">Sign Up</button>
+          <br>
+          
         </form>
       </div>
     </div>
@@ -32,19 +37,20 @@ export default {
   methods: {
     submitForm(event) {
       event.preventDefault();
-
+ 
       const passwordCredential = this.password;
       const passwordCredential2 = this.password2;
 
-
+      var json ={};
       const passwordsAreEqual = passwordCredential === passwordCredential2;
-
       if (passwordsAreEqual) {
-        console.log('Las contraseñas son iguales');
-        return console.log(true);
+        json["username"]  = this.username;
+        json["email"] = this.email;
+        json["password"] = this.password;
+        return console.log(json);
         
-      } else {
-        console.log('Las contraseñas son diferentes');
+      } else { 
+        window.alert("passwords are incorrect")
 
         return console.log(false);
       }
