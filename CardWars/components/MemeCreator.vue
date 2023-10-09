@@ -1,47 +1,81 @@
 <template>
-    <div>
-        <h1 id="Mis-Memes">Mis Memes</h1>
+    <center>
+        <div>
+            <h1 id="Mis-Memes">Mis Memes</h1>
 
-        <!-- Selector de plantillas -->
-        <select v-model="selectedTemplate" class="template-selector">
-            <option v-for="template in availableTemplates" :key="template" :value="template">
-                {{ template }}
-            </option>
-        </select>
+            <!-- Selector de plantillas -->
+            <select v-model="selectedTemplate">
+                <option v-for="template in availableTemplates" :key="template" :value="template">
+                    {{ template }}
+                </option>
+            </select>
 
-        <!-- Botón para crear meme -->
-        <button @click="createMeme" class="create-button">Create Meme</button>
+            <!-- Selector de cartas -->
+            <select v-model="selectedCard">
+                <option v-for="(card, index) in savedCards" :key="index" :value="card">
+                    Carta {{ index + 1 }}
+                </option>
+            </select>
 
-        <!-- Contenedor para mostrar el meme -->
-        <div v-if="memeCreated" class="meme-container" :style="memeStyle"></div>
-    </div>
+            <!-- Botón para crear meme -->
+            <button @click="createMeme">Create Meme</button>
+
+            <!-- Contenedor para mostrar el meme -->
+            <div v-if="memeCreated" class="meme-container" :style="memeStyle">
+                <div v-if="selectedCard" class="card" :style="cardStyle">
+                    {{ selectedCard.content }}
+                </div>
+            </div>
+        </div>
+    </center>
 </template>
-
+  
 <script>
 export default {
     data() {
         return {
             selectedTemplate: null,
+            selectedCard: null,
             memeCreated: false,
+            savedCards: JSON.parse(localStorage.getItem('savedCards')) || [], // Agregamos esta línea
             availableTemplates: ['azul', 'cafe', 'morado', 'negro', 'oliva', 'oro']
         };
     },
     computed: {
         memeStyle() {
             return {
-                backgroundImage: `url(/cardimgs/${this.selectedTemplate}.jpeg)`, 
+                backgroundImage: `url(/cardimgs/${this.selectedTemplate}.jpeg)`,
                 backgroundSize: 'cover',
-                width: '650px', /* Ajusta según tus necesidades */
-                height: '965.5px', /* Ajusta según tus necesidades */
-                margin: '20px auto' /* Ajusta según tus necesidades */
+                width: '650px',
+                height: '965.5px',
+                margin: '20px auto'
+            };
+        },
+        cardStyle() {
+            return {
+                backgroundColor: this.selectedCard.backgroundColor,
+                fontFamily: this.selectedCard.font,
+                width: '603px',
+                height: '196px',
+                padding: '20px',
+                border: '1px solid #ccc',
+                position: 'relative',
+                top: '732px', // Ajuste de posición vertical
+                left: '0px'   // Ajuste de posición horizontal
             };
         }
     },
     methods: {
         createMeme() {
-            if (this.selectedTemplate) {
+            if (this.selectedTemplate && this.selectedCard) {
                 this.memeCreated = true;
             }
+        }
+    },
+    created() {
+        // Cargamos las cartas guardadas del localStorage
+        if (typeof localStorage !== 'undefined') {
+            this.savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
         }
     }
 };
@@ -67,13 +101,15 @@ export default {
 }
 
 .create-button {
-    background-color: #007bff; /* Cambia el color para el botón "Create Meme" */
+    background-color: #007bff;
+    /* Cambia el color para el botón "Create Meme" */
     color: #fff;
 }
 
 .create-button:hover,
 .template-selector:hover {
-    background-color: #0056b3; /* Cambia el color al hacer hover */
+    background-color: #0056b3;
+    /* Cambia el color al hacer hover */
 }
 
 .meme-container {
