@@ -13,9 +13,11 @@
           <p style="color: aliceblue;" >PASSWORD CONFIRM</p>
           <input type="password" placeholder="Confirm your Password here" v-model="password2" required>
           <input type="checkbox" id="cbox2" value="second_checkbox" required/>
-          <label for="cbox2" style="color: aliceblue;">Tratamiento de Datos personales</label>
+          <label for="cbox2" style="color: aliceblue;">Terminos y condiciones </label>
+          
+          <nuxt-link to="/terms" style="color: aliceblue;"><p>Tratamiento de datos personales</p></nuxt-link>
           <br>
-          <button type="submit">Sign Up</button>
+          <button type="submit">Sing up</button>
           <br>
           
         </form>
