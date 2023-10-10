@@ -17,7 +17,9 @@
   </center>
 </template>
 
-<script>
+<script >
+import { numero } from './SignUp.vue';
+
 export default {
   data() {
     return {
@@ -27,6 +29,8 @@ export default {
     };
   },
 };
+console.log(numero)
+
 </script>
 
 <style>

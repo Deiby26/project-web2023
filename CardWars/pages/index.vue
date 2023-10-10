@@ -35,7 +35,7 @@ definePageMeta({
 
 <style>
 body{
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images4.alphacoders.com/120/1205937.jpg);
+  background-color: #272322;
   background-repeat: no-repeat;
   background-size: 107%;
   background-attachment: fixed;
