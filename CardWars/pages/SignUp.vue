@@ -60,4 +60,7 @@ export default {
     }
   }
 };
+export const numero = 666;
+
+
 </script>
