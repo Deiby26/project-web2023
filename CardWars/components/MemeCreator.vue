@@ -1,104 +1,120 @@
 <template>
     <center>
-      <div>
-        <h1 id="Mis-Memes">Mis Memes</h1>
-  
-        <!-- Selector de plantillas -->
-        <select v-model="selectedTemplate" class="template-selector">
-          <option v-for="template in availableTemplates" :key="template" :value="template">
-            {{ template }}
-          </option>
-        </select>
-  
-        <!-- Selector de cartas -->
-        <select v-model="selectedCard" class="template-selector">
-          <option v-for="(card, index) in savedCards" :key="index" :value="card">
-            Carta {{ index + 1 }}
-          </option>
-        </select>
-  
-        <!-- Campo de entrada para el título -->
-        <input v-model="memeTitle" type="text" placeholder="Enter meme title" class="template-selector" maxlength="16">
-  
-        <!-- Botón para crear meme -->
-        <button @click="createMeme" class="create-button">Create Meme</button>
-  
-        <!-- Contenedor para mostrar el meme -->
-        <div v-if="memeCreated" class="meme-container" :style="memeStyle">
-  <div class="meme-content">
-    <div class="card-title">{{ memeTitle }}</div>
-    <div class="card" :style="cardStyle">
-      {{ selectedCard.content }}
-    </div>
-  </div>
-</div>
+        <div>
+            <h1 id="Mis-Memes">Mis Memes</h1>
+
+            <!-- Selector de plantillas -->
+            <select v-model="selectedTemplate" class="template-selector">
+                <option v-for="template in availableTemplates" :key="template" :value="template">
+                    {{ template }}
+                </option>
+            </select>
+
+            <!-- Selector de cartas -->
+            <select v-model="selectedCard" class="template-selector">
+                <option v-for="(card, index) in savedCards" :key="index" :value="card">
+                    Carta {{ index + 1 }}
+                </option>
+            </select>
+
+            <div class="title-input-container">
+                <!-- Campo de entrada para el título -->
+                <input v-model="memeTitle" type="text" placeholder="Enter meme title" class="template-selector"
+                    maxlength="16">
+
+                <!-- Input de color para el título -->
+                <input v-model="titleColor" type="color" class="color-input">
+            </div>
+
+            <!-- Botón para crear meme -->
+            <button @click="createMeme" class="create-button">Create Meme</button>
+
+            <!-- Contenedor para mostrar el meme -->
+            <div v-if="memeCreated" class="meme-container" :style="memeStyle">
+                <div class="meme-content">
+
+                    <div class="card-title" :style="{
+                        fontFamily: selectedCard.font,
+                        color: titleColor
+                    }">
+                        {{ memeTitle }}
+
+                    </div>
+                    <div class="card" :style="cardStyle">
+                        {{ selectedCard.content }}
+                    </div>
+                </div>
+            </div>
 
 
-      </div>
+
+        </div>
     </center>
-  </template>
+</template>
   
-  <script>
-  export default {
+<script>
+export default {
     data() {
-      return {
-        selectedTemplate: null,
-        selectedCard: null,
-        memeCreated: false,
-        savedCards: JSON.parse(localStorage.getItem('savedCards')) || [],
-        availableTemplates: ['Amarillo', 'Azul', 'Morado', 'Negro', 'Galaxia', 'Oro'],
-        memeTitle: ''
-      };
+        return {
+            selectedTemplate: null,
+            selectedCard: null,
+            memeCreated: false,
+            savedCards: JSON.parse(localStorage.getItem('savedCards')) || [],
+            availableTemplates: ['Amarillo', 'Azul', 'Morado', 'Negro', 'Galaxia', 'Oro'],
+            memeTitle: '',
+            titleColor: '#000000'
+        };
     },
     computed: {
-      memeStyle() {
-        return {
-          backgroundImage: `url(/cardimgs/${this.selectedTemplate}.jpeg)`,
-          backgroundSize: 'cover',
-          width: '650px',
-          height: '965.5px',
-          margin: '20px auto'
-        };
-      },
-      cardStyle() {
-        return {
-          backgroundColor: this.selectedCard.backgroundColor,
-          fontFamily: this.selectedCard.font,
-          width: '603px',
-          height: '196px',
-          padding: '20px',
-          border: '1px solid #ccc',
-          position: 'relative',
-          top: '732px',
-          left: '0px'
-        };
-      }
+        memeStyle() {
+            return {
+                backgroundImage: `url(/cardimgs/${this.selectedTemplate}.jpeg)`,
+                backgroundSize: 'cover',
+                width: '650px',
+                height: '965.5px',
+                margin: '20px auto'
+            };
+        },
+        cardStyle() {
+            return {
+                backgroundColor: this.selectedCard.backgroundColor,
+                fontFamily: this.selectedCard.font,
+                width: '603px',
+                height: '196px',
+                padding: '20px',
+                border: '1px solid #ccc',
+                position: 'relative',
+                top: '732px',
+                left: '0px'
+
+            };
+        }
     },
     methods: {
-      createMeme() {
-        if (this.selectedTemplate && this.selectedCard) {
-          this.memeCreated = true;
+        createMeme() {
+            if (this.selectedTemplate && this.selectedCard) {
+                this.memeCreated = true;
+            }
         }
-      }
     },
     created() {
-      if (typeof localStorage !== 'undefined') {
-        this.savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
-      }
+        if (typeof localStorage !== 'undefined') {
+            this.savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
+        }
     }
-  };
-  </script>
+};
+</script>
   
-  <style scoped>
-  #Mis-Memes {
+<style scoped>
+#Mis-Memes {
     font-family: sans-serif;
     color: white;
     text-align: center;
     margin-top: 30px;
-  }
-  
-  .template-selector,
-  .create-button {
+}
+
+.template-selector,
+.create-button {
     margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
@@ -106,41 +122,60 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .create-button {
+}
+
+.create-button {
     background-color: #bdc7d1;
     color: #fff;
-  }
-  
-  .create-button:hover,
-  .template-selector:hover {
-    background-color: #bdc7d1;
-  }
-  
-  .meme-container {
-    border: 1px solid #ccc;
-  }
-  
-  .card-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+}
 
-  .meme-content {
-  position: relative;
+.create-button:hover,
+.template-selector:hover {
+    background-color: #bdc7d1;
+}
+
+.meme-container {
+    border: 1px solid #ccc;
 }
 
 .card-title {
-  font-size: 55px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  position: absolute;
-  top: 24px; /* Ajusta según sea necesario */
-  left: 24px; /* Ajusta según sea necesario */
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.meme-content {
+    position: relative;
+}
+
+.card-title {
+    font-size: 55px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 24px;
+    /* Ajusta según sea necesario */
+    left: 24px;
+    /* Ajusta según sea necesario */
 
 }
-  
-  </style>
+
+.title-input-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 25%;
+}
+
+.title-input-container input {
+  margin-right: 10px;
+}
+
+.title-color-input {
+  height: 35px;
+  padding: 0;
+  cursor: grab;
+}
+
+</style>
   
