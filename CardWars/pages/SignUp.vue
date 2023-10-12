@@ -27,6 +27,9 @@
 </template>
 
 <script>
+
+
+
 export default {
   data() {
     return {
@@ -49,18 +52,17 @@ export default {
         json["username"]  = this.username;
         json["email"] = this.email;
         json["password"] = this.password;
-        return console.log(json);
+        localStorage.setItem('JSON', JSON.stringify(json));
+        this.$router.push('/Login');
         
       } else { 
         window.alert("passwords are incorrect")
-
-        return console.log(false);
       }
 
     }
   }
 };
-export const numero = 666;
+
 
 
 </script>

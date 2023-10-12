@@ -18,7 +18,7 @@
 </template>
 
 <script >
-import { numero } from './SignUp.vue';
+
 
 export default {
   data() {
@@ -29,7 +29,10 @@ export default {
     };
   },
 };
-console.log(numero)
+var objetoRecuperado = JSON.parse(localStorage.getItem('JSON'));
+
+
+
 
 </script>
 
