@@ -80,6 +80,7 @@ export default {
     }
     if (contador === 3){
       window.alert("INCIO DE SECCION")
+      this.$router.push('/initialized');
     }else{
       window.alert("LAS CREDECIALES NO COINCIDEN")
       

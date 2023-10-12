@@ -4,16 +4,12 @@
     <br>
     <p id="Subtittle">A place where your ideas can be brought to life</p>
     <br>
+  
     <nuxt-link to="/Login" id="Got-To-Login">Go to Login</nuxt-link>
     <br>
     <br>
     <nuxt-link to="/SignUp" id="Sign-Up">Sign up</nuxt-link>
     <br>
-    <br>
-    <nuxt-link to="/CardPage" id="Create-Card">Create a personalized text</nuxt-link>
-    <br>
-    <br>
-    <nuxt-link to="/MemePage" id="Create-Meme">Create a Meme card</nuxt-link>
   </center>
 </template>
 
@@ -31,10 +27,12 @@ export default {
 definePageMeta({
   layout: "blank",
 });
+
 </script>
 
 <style>
 body{
+  background-image: url(https://www.xtrafondos.com/wallpapers/gato-astronauta-en-el-espacio-5516.jpg);
   background-color: #272322;
   background-repeat: no-repeat;
   background-size: 107%;
