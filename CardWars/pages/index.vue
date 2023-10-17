@@ -24,6 +24,7 @@ export default {
   },
 };
 
+
 definePageMeta({
   layout: "blank",
 });
