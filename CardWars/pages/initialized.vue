@@ -8,3 +8,9 @@
       <nuxt-link to="/MemePage" id="Create-Meme">Create a Meme card</nuxt-link>
     </center>
   </template>
+
+  <script>
+definePageMeta({
+  layout: "default",
+});
+</script>

@@ -31,17 +31,6 @@ definePageMeta({
 </script>
 
 <style>
-body{
-  background-image: url(https://www.xtrafondos.com/wallpapers/gato-astronauta-en-el-espacio-5516.jpg);
-  background-color: #272322;
-  background-repeat: no-repeat;
-  background-size: 107%;
-  background-attachment: fixed;
-  background-position: center center;
-  margin: 0;
-  padding: 0;
-}
-
 #Welcome{
   font-family: sans-serif;
   color: white;
