@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NuxtLink to="/MemePage">CREAR MEME</NuxtLink>
     <h1 id="Mis-Memes">Mis Memes</h1>
     <div class="meme-container">
       <div v-for="(meme, index) in savedMemes" :key="index" class="meme-item">
