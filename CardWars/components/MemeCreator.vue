@@ -74,7 +74,6 @@ export default {
         backgroundSize: 'cover',
         width: '650px',
         height: '965.5px',
-        margin: '20px auto'
       };
     },
     cardStyle() {
@@ -87,7 +86,8 @@ export default {
         border: '1px solid #ccc',
         position: 'relative',
         top: '732px',
-        left: '0px'
+        left: '0px',
+        margin: 'auto',  // Agregamos esta línea
       };
     }
   },
