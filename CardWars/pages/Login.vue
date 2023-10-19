@@ -85,8 +85,8 @@ export default {
       }
     }
     if (contador === 3){
-      window.alert("INCIO DE SECCION")
-      this.$router.push('/initialized');
+      window.alert("INCIO DE SESIÓN")
+      this.$router.push('/Home');
     }else{
       window.alert("LAS CREDECIALES NO COINCIDEN")
       

@@ -3,8 +3,12 @@
       <nav class="navbar">
         <ul>
           <li><nuxt-link to="/">Inicio</nuxt-link></li>
-          <li><nuxt-link to="/MyMemesPage">Mis Memes</nuxt-link></li>
           <li><nuxt-link to="/MyCardsPage">Mis Cartas</nuxt-link></li>
+          <li><nuxt-link to="/CardPage">Crear Nueva Carta</nuxt-link></li>
+          <li><nuxt-link to="/MyMemesPage">Mis Memes</nuxt-link></li>        
+          <li><nuxt-link to="/MemePage">Crear Nuevo Meme</nuxt-link></li>
+          <li><nuxt-link to="/BlogPage">Blog</nuxt-link></li>
+
         </ul>
       </nav>
   
