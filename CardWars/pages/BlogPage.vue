@@ -1,14 +1,15 @@
 <template>
   <div class="blog-page">
     <h1 id="Blog">Blog</h1>
-    <div class="button-new-entry">
-      <button class="button-create-entry" @click="showEntryCreator">Crear nueva entrada del blog</button>
+    <div class="button-container">
+      <button @click="showEntryCreator">Crear nueva entrada del blog</button>
     </div>
-    <BlogEntryCreator v-if="showCreator" @new-entry="addNewEntry" />
+    <BlogEntryCreator v-if="showCreator" @new-entry="addNewEntry" @cancel="cancelEntryCreation" />
     <BlogEntry v-for="(entry, index) in blogEntries" :key="index" :entry="entry" @delete-entry="deleteEntry"
       @update-entry="updateEntry" />
   </div>
 </template>
+
 <script>
 import BlogEntry from '@/components/BlogEntry.vue';
 import BlogEntryCreator from '@/components/BlogEntryCreator.vue';
@@ -21,18 +22,23 @@ export default {
   data() {
     return {
       blogEntries: this.loadEntriesFromLocalStorage(),
-      showCreator: false
+      savedMemes: this.loadMemesFromLocalStorage(),
+      showCreator: false,
+
     };
   },
   methods: {
     addNewEntry(entry) {
       this.blogEntries.push({
-        id: Date.now(), 
+        id: Date.now(), // Generamos un id único (en este caso usando la marca de tiempo)
         ...entry
       });
       this.saveEntriesToLocalStorage(this.blogEntries);
-      this.showCreator = false; 
+      this.showCreator = false; // Ocultar el BlogEntryCreator después de crear una entrada
 
+    },
+    cancelEntryCreation() {
+      this.showCreator = false; // Ocultar el BlogEntryCreator después de cancelar la creación
     },
     deleteEntry(entryToDelete) {
       this.blogEntries = this.blogEntries.filter(entry => entry.id !== entryToDelete.id);
@@ -53,6 +59,12 @@ export default {
       }
       return [];
     },
+    loadMemesFromLocalStorage() {
+      if (process.client) {
+        return JSON.parse(localStorage.getItem('savedMemes')) || [];
+      }
+      return [];
+    },
     saveEntriesToLocalStorage(entries) {
       if (process.client) {
         localStorage.setItem('blogEntries', JSON.stringify(entries));
@@ -60,7 +72,7 @@ export default {
     },
 
     showEntryCreator() {
-      this.showCreator = true; 
+      this.showCreator = true; // Mostrar el BlogEntryCreator al hacer clic en el botón
     }
   }
 };
@@ -76,6 +88,7 @@ export default {
 
 button {
   margin-bottom: 10px;
+  margin-top: 10px;
   padding: 8px 16px;
   background-color: #0080ff;
   color: #fff;
@@ -89,12 +102,16 @@ button:hover {
   background-color: #005d9f;
 }
 
+.button-container {
+  text-align: center;
+}
+
 .button-new-entry {
   margin-top: 15px;
   text-align: center;
 }
 
-.button-create-entry{
+.button-create-entry {
   margin-bottom: 10px;
   padding: 8px 16px;
   background-color: #81a6b3;
@@ -104,3 +121,4 @@ button:hover {
   cursor: pointer;
 }
 </style>
+

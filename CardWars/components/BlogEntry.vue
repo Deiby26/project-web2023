@@ -9,6 +9,7 @@
       <button @click="editEntry" class="edit-button">Editar</button>
     </div>
 
+    <!-- Modal de Edición -->
     <div v-if="isEditModalOpen" class="edit-modal">
       <div class="edit-modal-content">
         <h3>Editar Entrada</h3>
@@ -62,7 +63,6 @@ export default {
 };
 </script>
   
-  
 <style scoped>
 .blog-entry {
     border: 1px solid #ccc;
@@ -101,7 +101,7 @@ export default {
 
 }
 .edit-button {
-  background-color: #00be00; 
+  background-color: #00be00; /* Cambia a verde (puedes ajustar el color según tus preferencias) */
   color: #fff;
 }
 
@@ -152,6 +152,18 @@ button {
 .save-button {
   background-color: #00ff00;
   color: #fff;
+}
+
+.meme-selection {
+  margin-top: 10px;
+}
+
+.meme-selection label {
+  margin-right: 5px;
+}
+
+.selected-meme img {
+  max-width: 25%; /* El meme se muestra a un cuarto de su tamaño original */
 }
 
 </style>

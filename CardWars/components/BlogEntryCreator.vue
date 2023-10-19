@@ -10,35 +10,59 @@
         <label for="description">Descripción:</label>
         <textarea v-model="description" id="description" required class="input-field textarea"></textarea>
       </div>
+      <div class="form-group">
+        <label for="selectedMeme">Selecciona un Meme:</label>
+      <select v-model="selectedMeme" id="selectedMeme" required class="input-field">
+        <option v-for="meme in savedMemes" :key="meme.id" :value="meme.id">{{ meme.title }}</option>
+      </select>
+      </div>
+      <div class="button-container">
       <button type="submit">Crear Entrada</button>
+      <button type="button" @click="cancel">Cancelar</button>
+    </div>
     </form>
   </div>
 </template>
-
+  
 <script>
 export default {
   data() {
     return {
       title: '',
-      description: ''
+      description: '',
+      selectedMeme: '', // Agregamos el dato seleccionado para el meme
     };
   },
+  computed: {
+    savedMemes() {
+      // Obtén los memes guardados del localStorage (si están disponibles)
+      return JSON.parse(localStorage.getItem('savedMemes')) || [];
+    },
+  },
   methods: {
-      createEntry() {
-  const entry = {
-    title: this.title,
-    description: this.description
-  };
+    createEntry() {
+      const entry = {
+        title: this.title,
+        description: this.description,
+        memeId: this.selectedMeme, // Agregamos el ID del meme seleccionado
+      };
 
-  this.$emit('new-entry', entry);
+      this.$emit('new-entry', entry);
 
-  this.title = '';
-  this.description = '';
-}
+      this.title = '';
+      this.description = '';
+      this.selectedMeme = ''; // Limpiamos la selección del meme después de crear la entrada
+    },
+    cancel() {
+    this.$emit('cancel'); // Emite un evento para notificar que se ha cancelado la creación de entrada
+    this.title = '';
+    this.description = '';
+    this.selectedMeme = ''; // Limpia los campos después de cancelar
+  }
   }
 };
 </script>
-
+  
 <style scoped>
 .form-group {
   margin-bottom: 10px;
@@ -81,28 +105,39 @@ button:hover {
   margin: auto;
   text-align: center;
   color: white;
-  margin-top: 50px;
+  margin-top: 15px;
 }
 
 .form-group {
-margin-bottom: 10px;
-display: flex; 
-justify-content: center; 
+  margin-bottom: 10px;
+  display: flex;
+  /* Añade display flex */
+  justify-content: center;
+  /* Centra horizontalmente los elementos */
 }
 
 .form-group label {
-color: white;
-flex: 1; 
-margin-top: 20px; 
+  color: white;
+  flex: 1;
+  /* El label toma el espacio disponible */
+  margin-top: 20px;
+  /* Agrega un margen en la parte inferior del label */
 }
 
 .input-field,
 .textarea {
-flex: 2; 
+  flex: 2;
+  /* El campo de entrada toma más espacio */
 }
 
 .button-container {
-display: flex;
-justify-content: space-around; 
+  display: flex;
+  justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
+  margin-top: 20px; /* Espacio entre los botones y el formulario */
+}
+
+.button-container button {
+  margin-left: 10px; /* Espacio entre los botones */
 }
 </style>
+  

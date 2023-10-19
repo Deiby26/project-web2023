@@ -2,7 +2,6 @@
   <div class="meme-page">
     <h1 style="color: white;">Crear meme</h1>
     <MemeCreator />
-    <nuxt-link to="/MyMemesPage" id="Ver-Mis-Memes" class="custom-link">Ver Mis Memes</nuxt-link>
   </div>
 </template>
   

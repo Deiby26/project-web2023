@@ -1,9 +1,9 @@
 <template>
   <div>
-    <NuxtLink to="/MemePage">CREAR MEME</NuxtLink>
     <h1 id="Mis-Memes">Mis Memes</h1>
     <div class="meme-container">
       <div v-for="(meme, index) in savedMemes" :key="index" class="meme-item">
+
         <div class="meme-content" :style="memeStyle(meme)">
           <img :src="meme.image" alt="Meme Image" class="meme-image" />
           <div class="card-title" :style="cardTitleStyle(meme)">
@@ -13,17 +13,18 @@
             {{ meme.card.content }}
           </div>
         </div>
-        <button @click="editMeme(index)">Editar</button>
-        <button @click="deleteMeme(index)">Eliminar</button>
+        <div class="button-container">
+          <button @click="editMeme(index)" class="edit-button">Editar</button>
+          <button @click="deleteMeme(index)" class="delete-button">Eliminar</button>
+        </div>
       </div>
     </div>
 
-    <!-- Diálogo de edición -->
     <div v-if="isEditDialogOpen" class="edit-dialog">
       <h2>Editar Meme</h2>
       <div class="form-group">
         <label for="editedMemeTitle">Título:</label>
-        <input type="text" id="editedMemeTitle" v-model="editedMemeTitle" maxlength="16"/>
+        <input type="text" id="editedMemeTitle" v-model="editedMemeTitle" maxlength="16" />
       </div>
       <div class="form-group">
         <label for="editedMemeImage">Imagen:</label>
@@ -69,9 +70,8 @@ export default {
     };
   },
   created() {
-    if (typeof localStorage !== 'undefined') {
+    if (process.client) {
       this.savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || [];
-      // Actualiza savedCards con tus cartas guardadas
       this.savedCards = this.savedMemes.map(meme => meme.card);
     }
   },
@@ -136,30 +136,26 @@ export default {
       };
     },
     saveEditedMeme() {
+      if (process.client) {
       if (this.editMemeIndex !== null) {
-        // Actualiza las propiedades del meme
         this.savedMemes[this.editMemeIndex].title = this.editedMemeTitle;
         this.savedMemes[this.editMemeIndex].image = this.editedMemeImage;
         this.savedMemes[this.editMemeIndex].template = this.editedMemeTemplate;
         this.savedMemes[this.editMemeIndex].card = this.editedMemeCard;
-
-        // Guarda en localStorage
         localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
-
-        // Cierra el diálogo de edición
         this.closeEditDialog();
       }
+    }
     },
     deleteMeme(index) {
       this.savedMemes.splice(index, 1);
-      if (typeof localStorage !== 'undefined') {
+      if (process.client) {
         localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
       }
     },
   },
 };
 </script>
-
 <style scoped>
 #Mis-Memes {
   font-family: sans-serif;
@@ -169,25 +165,23 @@ export default {
 }
 
 .meme-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
   margin-bottom: 50px;
   display: flex;
   justify-content: center;
 }
 
-/* Estilos para el diálogo de edición */
-.edit-dialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 9999;
+
+.button-container {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
 }
 
-/* Estilos para el meme */
+
 .meme-content {
   display: flex;
   flex-direction: column;
@@ -218,5 +212,95 @@ export default {
   top: 50px;
   left: -2px;
 }
-/* Resto del estilo... */
+
+.edit-button,
+.delete-button {
+  margin: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 30px;
+  width: 100px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: #fff;
+}
+.edit-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.edit-dialog h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.buttons {
+  margin-top: 30px;
+}
+
+.buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttons button:first-child {
+  background-color: #4caf50; /* Verde */
+  color: #ffffff;
+}
+
+.buttons button:last-child {
+  background-color: #f44336; /* Rojo */
+  color: #ffffff;
+}
+
 </style>
