@@ -16,7 +16,7 @@
             <input type="password" placeholder="Ingresa tu contraseña para confirmar" v-model="password2" required>
             <input type="checkbox" id="cbox2" value="second_checkbox" required />
             <label for="cbox2" style="color: aliceblue;">Terminos y condiciones </label>
-            <a href="https://www.sic.gov.co/sites/default/files/documentos/072020/Política%20de%20Tratamiento%20de%20Datos%20Personales%20-%20SIC.pdf"
+            <a href="https://cache.dominos.com/olo/6_53_4/assets/build/market/PE/_en/pdf/national_menu.pdf"
               target="_blank" style="color: aliceblue;">Tratamiento de datos personales (PDF)</a>
             <br>
             <button type="submit">Registrarse</button>
