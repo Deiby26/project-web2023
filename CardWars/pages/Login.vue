@@ -12,8 +12,9 @@
             <input type="email" placeholder="Ingresa tu correo electrónico" v-model="emaill" required>
             <p id="Password">Contraseña</p>
             <input type="password" placeholder="Ingresa tu contraseña" v-model="passwordl" required>
-            <button type="submit">Ingresar</button>
+            <button type="submit">Ingresar</button><br>
           </form>
+          <button type="submit" @click="regresarl" class="regresarl">Regresar</button>
         </div>
       </div>
     </div>
@@ -91,9 +92,11 @@ export default {
         window.alert("LAS CREDECIALES NO COINCIDEN")
 
       }
+    },
+    regresarl(){
+      this.$router.push('/');
     }
-
-  }
+  },
 };
 
 </script>
@@ -102,7 +105,7 @@ export default {
 .styled-div {
   background-color: rgba(233, 38, 200, 0.5);
   width: 600px;
-  height: 350px;
+  height: 450px;
   border-radius: 20px;
 }
 
@@ -124,5 +127,18 @@ export default {
 #Login {
   font-family: sans-serif;
   color: white;
+}
+.regresarl {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.regresarl:hover {
+  background-color: green;
 }
 </style>

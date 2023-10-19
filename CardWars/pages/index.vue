@@ -4,12 +4,8 @@
     <br>
     <p id="Subtittle">¡Duelo de memes en cada carta! Despierta al creador de cartas en ti.</p>
     <br>
-
-    <nuxt-link to="/Login" id="Got-To-Login">Ingresar</nuxt-link>
-    <br>
-    <br>
-    <nuxt-link to="/SignUp" id="Sign-Up">Registrarse</nuxt-link>
-    <br>
+    <button type="submit" @click="redirigirlogin" class="redirigirlogin">Ingresar</button><br><br>
+    <button type="submit" @click="redirigirRegistro" class="redirigirRegistro">Registrarse</button>
   </center>
 </template>
 
@@ -22,6 +18,17 @@ export default {
       password: ''
     };
   },
+  methods: {
+    redirigirlogin() {
+      this.$router.push('/Login');
+
+    },
+    redirigirRegistro() {
+      this.$router.push('/SignUp');
+    }
+
+
+  }
 };
 
 
@@ -73,5 +80,33 @@ definePageMeta({
   color: white;
   text-align: center;
   line-height: 50px;
+}
+
+.redirigirlogin {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.redirigirlogin:hover {
+  background-color: #0056b3;
+}
+
+.redirigirRegistro {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.redirigirRegistro:hover {
+  background-color: #0056b3;
 }
 </style>

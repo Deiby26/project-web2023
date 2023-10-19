@@ -21,12 +21,8 @@
             <br>
             <button type="submit">Registrarse</button>
             <br>
-            <button type="submit">Regresar</button>
-            <p style="color: white;">DAVID HAGA ESTE BOTON DE MONDA AQUI Y EN INGRESAR</p>
-            <p style="color: white;">Y EN INGRESAR QUITE LO DE PONER CORREO, QUE SOLO SE INGRESE CON USUARIO O CORREO, NO
-              AMBOS</p>
-            <br>
           </form>
+          <button type="submit" @click="regresarindex" class="regresarindex">Regresar</button>
         </div>
       </div>
     </div>
@@ -37,9 +33,20 @@
 .transparent-div {
   background-color: rgba(197, 197, 231, 0.5);
   width: 600px;
-  height: 500px;
+  height: 600px;
   border-radius: 20px;
 }
+.regresarindex {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
 </style>
 
 
@@ -80,6 +87,13 @@ export default {
       }
 
     }
+  },
+  methods: {
+    regresarindex(){
+      this.$router.push('/');
+
+    }
+
   }
 };
 
