@@ -30,12 +30,11 @@ export default {
     return {
       title: '',
       description: '',
-      selectedMeme: '', // Agregamos el dato seleccionado para el meme
+      selectedMeme: '', 
     };
   },
   computed: {
     savedMemes() {
-      // Obtén los memes guardados del localStorage (si están disponibles)
       return JSON.parse(localStorage.getItem('savedMemes')) || [];
     },
   },
@@ -44,20 +43,20 @@ export default {
       const entry = {
         title: this.title,
         description: this.description,
-        memeId: this.selectedMeme, // Agregamos el ID del meme seleccionado
+        memeId: this.selectedMeme, 
       };
 
       this.$emit('new-entry', entry);
 
       this.title = '';
       this.description = '';
-      this.selectedMeme = ''; // Limpiamos la selección del meme después de crear la entrada
+      this.selectedMeme = ''; 
     },
     cancel() {
-    this.$emit('cancel'); // Emite un evento para notificar que se ha cancelado la creación de entrada
+    this.$emit('cancel'); 
     this.title = '';
     this.description = '';
-    this.selectedMeme = ''; // Limpia los campos después de cancelar
+    this.selectedMeme = ''; 
   }
   }
 };
@@ -111,33 +110,28 @@ button:hover {
 .form-group {
   margin-bottom: 10px;
   display: flex;
-  /* Añade display flex */
   justify-content: center;
-  /* Centra horizontalmente los elementos */
 }
 
 .form-group label {
   color: white;
   flex: 1;
-  /* El label toma el espacio disponible */
   margin-top: 20px;
-  /* Agrega un margen en la parte inferior del label */
 }
 
 .input-field,
 .textarea {
   flex: 2;
-  /* El campo de entrada toma más espacio */
 }
 
 .button-container {
   display: flex;
-  justify-content: flex-end; /* Alinea los elementos al final del contenedor (derecha) */
-  margin-top: 20px; /* Espacio entre los botones y el formulario */
+  justify-content: flex-end; 
+  margin-top: 20px; 
 }
 
 .button-container button {
-  margin-left: 10px; /* Espacio entre los botones */
+  margin-left: 10px;
 }
 </style>
   

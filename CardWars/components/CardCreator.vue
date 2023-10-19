@@ -138,11 +138,11 @@ h3 {
 
 
 .create-button {
-  background-color: #28a745; /* Cambia el color para el botón "Create" */
+  background-color: #28a745; 
 }
 
 .save-button {
-  background-color: #007bff; /* Cambia el color para el botón "Save" */
+  background-color: #007bff;
 }
 
 form button:hover {

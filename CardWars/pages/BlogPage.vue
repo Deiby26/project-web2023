@@ -30,15 +30,15 @@ export default {
   methods: {
     addNewEntry(entry) {
       this.blogEntries.push({
-        id: Date.now(), // Generamos un id único (en este caso usando la marca de tiempo)
+        id: Date.now(), 
         ...entry
       });
       this.saveEntriesToLocalStorage(this.blogEntries);
-      this.showCreator = false; // Ocultar el BlogEntryCreator después de crear una entrada
+      this.showCreator = false;
 
     },
     cancelEntryCreation() {
-      this.showCreator = false; // Ocultar el BlogEntryCreator después de cancelar la creación
+      this.showCreator = false;
     },
     deleteEntry(entryToDelete) {
       this.blogEntries = this.blogEntries.filter(entry => entry.id !== entryToDelete.id);
@@ -72,7 +72,7 @@ export default {
     },
 
     showEntryCreator() {
-      this.showCreator = true; // Mostrar el BlogEntryCreator al hacer clic en el botón
+      this.showCreator = true; 
     }
   }
 };

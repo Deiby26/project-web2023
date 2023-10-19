@@ -44,6 +44,10 @@ export default {
   font-size: 16px;
 }
 
+.content{
+  flex-grow: 1;
+}
+
 .boton-crear-meme:hover {
   background-color: #0056b3;
 }

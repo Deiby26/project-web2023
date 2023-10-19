@@ -320,13 +320,11 @@ export default {
 
 .buttons button:first-child {
   background-color: #4caf50;
-  /* Verde */
   color: #ffffff;
 }
 
 .buttons button:last-child {
   background-color: #f44336;
-  /* Rojo */
   color: #ffffff;
 }
 </style>

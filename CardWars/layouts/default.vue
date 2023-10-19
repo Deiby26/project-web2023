@@ -25,11 +25,11 @@
 .loged {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Esto distribuirá el contenido verticalmente */
-  min-height: 100vh; /* Establece una altura mínima de la ventana */
+  justify-content: space-between; 
+  min-height: 100vh; 
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.xtrafondos.com/wallpapers/astronauta-perdido-en-el-espacio-5498.jpg);
   background-repeat: no-repeat;
-  background-size: cover; /* Usa cover para asegurarte de que la imagen cubra todo el contenedor */
+  background-size: cover; 
   background-attachment: fixed;
   background-position: center center;
   margin: 0;
@@ -39,20 +39,6 @@
 </style>
 
 <style scoped>
-.loged {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Esto distribuirá el contenido verticalmente */
-  min-height: 100vh; /* Establece una altura mínima de la ventana */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://www.xtrafondos.com/wallpapers/astronauta-perdido-en-el-espacio-5498.jpg);
-  background-repeat: no-repeat;
-  background-size: cover; /* Usa cover para asegurarte de que la imagen cubra todo el contenedor */
-  background-attachment: fixed;
-  background-position: center center;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -68,18 +54,18 @@
 .navbar li {
   display: inline;
   margin-right: 20px;
-  position: relative; /* Agregamos posición relativa */
+  position: relative; 
 }
 
 .navbar a {
   color: white;
   text-decoration: none;
-  transition: 0.3s; /* Agregamos una transición suave */
+  transition: 0.3s; 
 }
 
 .navbar a:hover {
   text-decoration: underline;
-  font-size: 1.1em; /* Agrandamos el texto */
+  font-size: 1.1em;
 }
 
 .navbar a::after {
@@ -90,13 +76,13 @@
   bottom: 0;
   left: 0;
   background-color: white;
-  transform: scaleX(0); /* Inicialmente sin ancho */
+  transform: scaleX(0);
   transform-origin: bottom right;
-  transition: transform 0.3s ease-out; /* Agregamos una transición a la línea */
+  transition: transform 0.3s ease-out; 
 }
 
 .navbar a:hover::after {
-  transform: scaleX(1); /* Hacemos que la línea aparezca */
+  transform: scaleX(1); 
   transform-origin: bottom left;
 }
 

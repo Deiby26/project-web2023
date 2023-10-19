@@ -9,7 +9,6 @@
       <button @click="editEntry" class="edit-button">Editar</button>
     </div>
 
-    <!-- Modal de Edición -->
     <div v-if="isEditModalOpen" class="edit-modal">
       <div class="edit-modal-content">
         <h3>Editar Entrada</h3>
@@ -101,7 +100,7 @@ export default {
 
 }
 .edit-button {
-  background-color: #00be00; /* Cambia a verde (puedes ajustar el color según tus preferencias) */
+  background-color: #00be00; 
   color: #fff;
 }
 
@@ -163,7 +162,7 @@ button {
 }
 
 .selected-meme img {
-  max-width: 25%; /* El meme se muestra a un cuarto de su tamaño original */
+  max-width: 25%; 
 }
 
 </style>
