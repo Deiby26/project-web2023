@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="template-container">
     <div class="meme-creator">
       <div class="select-container">
@@ -34,6 +35,50 @@
         </div>
         <div class="card" :style="cardStyle">
           {{ selectedCard.content }}
+=======
+  <center>
+    <div>
+      <h1 id="Mis-Memes">Mis Memes</h1>
+
+      <select v-model="selectedTemplate" class="template-selector">
+        <option v-for="template in availableTemplates" :key="template" :value="template">
+          {{ template }}
+        </option>
+      </select>
+
+      <select v-model="selectedCard" class="template-selector">
+        <option v-for="(card, index) in savedCards" :key="index" :value="card">
+          Carta {{ index + 1 }}
+        </option>
+      </select>
+
+      <div class="title-input-container">
+        <input v-model="memeTitle" type="text" placeholder="Ingresar titulo del meme" class="template-selector"
+          maxlength="50">
+
+        <input v-model="titleColor" type="color" class="color-input title-color-input">
+      </div>
+
+      <input type="file" accept="image/*" @change="handleImageUpload"
+        class="template-selector with-white-border-and-background" />
+
+      <button @click="createMeme" class="create-button">Crear meme</button>
+
+      <button @click="saveMeme" class="create-button">Guardar meme</button>
+
+      <div v-if="memeCreated" class="meme-container" :style="memeStyle">
+        <div class="meme-content">
+          <img :src="memeImage" alt="Meme Image" class="meme-image" />
+          <div class="card-title" :style="{
+            fontFamily: selectedCard.font,
+            color: titleColor
+          }">
+            {{ memeTitle }}
+          </div>
+          <div class="card" :style="cardStyle">
+            {{ selectedCard.content }}
+          </div>
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
         </div>
       </div>
     </div>
@@ -106,7 +151,7 @@ export default {
       };
       this.savedMemes.push(meme);
       localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
-      alert('Meme saved successfully!');
+      alert('¡Meme guardado correctamente!');
     }
   },
   created() {
@@ -209,6 +254,8 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  max-width: 550px;
+  width: 100%;
 }
 
 .title-input-container input {
@@ -229,6 +276,7 @@ export default {
   right: 61px;
 }
 
+<<<<<<< HEAD
 .meme-creator {
   max-width: 500px;
   margin: auto;
@@ -243,7 +291,11 @@ export default {
 
 .create-button {
   margin: 0 10px;
+=======
+.with-white-border-and-background {
+  border: 2px solid white;
+  background-color: white;
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 }
 </style>
 
-  

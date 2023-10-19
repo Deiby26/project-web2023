@@ -2,10 +2,8 @@
   <div>
     <h1 id="Mis-Cartas">Mis Cartas</h1>
 
-    <!-- Botón para abrir el diálogo -->
     <nuxt-link to="/CardPage" id="Crear-Nueva-Carta">Crear nueva carta</nuxt-link>
 
-    <!-- Diálogo de edición -->
     <div class="edit-dialog" v-if="isEditDialogOpen">
       <h2>Editar Carta</h2>
       <div class="form-group">
@@ -28,7 +26,6 @@
       </div>
     </div>
 
-    <!-- Mostrar cartas aquí -->
     <div class="card-container">
       <div v-for="(card, index) in savedCards" :key="index" class="card-container-single">
         <div class="card" :style="{ backgroundColor: card.backgroundColor, fontFamily: card.font }">
@@ -153,12 +150,10 @@ button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  /* Ajusta según necesites */
 }
 
 .card {
   width: 300px;
-  /* Ancho fijo de la carta */
   padding: 20px;
   border: 1px solid #ccc;
   display: flex;
@@ -175,9 +170,7 @@ button {
 
 .card-buttons button {
   margin-top: 1px;
-  /* Espacio entre los botones */
   width: 100px;
-  /* Ancho fijo de los botones */
 }
 
 .form-group {
@@ -202,7 +195,6 @@ select {
 
 .color-input {
   height: 40px;
-  /* Ajusta la altura según tus preferencias */
 }
 
 .buttons button {
@@ -220,8 +212,8 @@ select {
   margin-left: 20px;
   margin-left: 2px;
   border: none;
-  background-color: #4caf50; 
-  color: #fff; 
+  background-color: #4caf50;
+  color: #fff;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s, transform 0.3s;
@@ -230,25 +222,25 @@ select {
 }
 
 .card-button-container button.delete-button {
-  background-color: #f44336; /* Color rojo */
+  background-color: #f44336;
 }
 
 .card-button-container button.edit-button:hover,
 .card-button-container button.delete-button:hover {
-  background-color: #7e9e7f; /* Color verde más oscuro */
-  transform: scale(1.05); /* Efecto de escala al hacer hover */
+  background-color: #7e9e7f;
+  transform: scale(1.05);
 }
 
 
 .more-info-icon {
   cursor: pointer;
-  width: 50px; /* Tamaño personalizado */
-  height: 50px; /* Tamaño personalizado */
+  width: 50px;
+  height: 50px;
   transition: transform 0.3s;
-  
+
 }
 
 .more-info-icon:hover {
-  transform: scale(1.1); /* Efecto de escala al hacer hover */
+  transform: scale(1.1);
 }
 </style>

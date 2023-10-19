@@ -3,7 +3,10 @@
     <h1 id="Mis-Memes">Mis Memes</h1>
     <div class="meme-container">
       <div v-for="(meme, index) in savedMemes" :key="index" class="meme-item">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
         <div class="meme-content" :style="memeStyle(meme)">
           <img :src="meme.image" alt="Meme Image" class="meme-image" />
           <div class="card-title" :style="cardTitleStyle(meme)">
@@ -13,6 +16,7 @@
             {{ meme.card.content }}
           </div>
         </div>
+<<<<<<< HEAD
         <div class="button-container">
           <button @click="editMeme(index)" class="edit-button">Editar</button>
           <button @click="deleteMeme(index)" class="delete-button">Eliminar</button>
@@ -25,6 +29,44 @@
       <div class="form-group">
         <label for="editedMemeTitle">Título:</label>
         <input type="text" id="editedMemeTitle" v-model="editedMemeTitle" maxlength="16" />
+      </div>
+      <div class="form-group">
+        <label for="editedMemeImage">Imagen:</label>
+        <input type="file" accept="image/*" @change="handleImageUpload" id="editedMemeImage" />
+      </div>
+      <div class="form-group">
+        <label for="editedMemeTemplate">Plantilla:</label>
+        <select v-model="editedMemeTemplate" class="template-selector">
+          <option v-for="template in availableTemplates" :key="template" :value="template">
+            {{ template }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="editedMemeCard">Carta asociada:</label>
+        <select v-model="editedMemeCard" class="template-selector">
+          <option value="">Selecciona una carta</option>
+          <option v-for="(card, index) in savedCards" :key="index" :value="card">
+            Carta {{ index + 1 }}
+          </option>
+        </select>
+      </div>
+      <div class="buttons">
+        <button @click="saveEditedMeme">Guardar</button>
+        <button @click="closeEditDialog">Cancelar</button>
+=======
+        <button @click="editMeme(index)">Editar</button>
+        <button @click="deleteMeme(index)">Eliminar</button>
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
+      </div>
+    </div>
+
+    <!-- Diálogo de edición -->
+    <div v-if="isEditDialogOpen" class="edit-dialog">
+      <h2>Editar Meme</h2>
+      <div class="form-group">
+        <label for="editedMemeTitle">Título:</label>
+        <input type="text" id="editedMemeTitle" v-model="editedMemeTitle" maxlength="16"/>
       </div>
       <div class="form-group">
         <label for="editedMemeImage">Imagen:</label>
@@ -70,8 +112,14 @@ export default {
     };
   },
   created() {
+<<<<<<< HEAD
     if (process.client) {
       this.savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || [];
+=======
+    if (typeof localStorage !== 'undefined') {
+      this.savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || [];
+      // Actualiza savedCards con tus cartas guardadas
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
       this.savedCards = this.savedMemes.map(meme => meme.card);
     }
   },
@@ -136,12 +184,18 @@ export default {
       };
     },
     saveEditedMeme() {
+<<<<<<< HEAD
       if (process.client) {
       if (this.editMemeIndex !== null) {
+=======
+      if (this.editMemeIndex !== null) {
+        // Actualiza las propiedades del meme
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
         this.savedMemes[this.editMemeIndex].title = this.editedMemeTitle;
         this.savedMemes[this.editMemeIndex].image = this.editedMemeImage;
         this.savedMemes[this.editMemeIndex].template = this.editedMemeTemplate;
         this.savedMemes[this.editMemeIndex].card = this.editedMemeCard;
+<<<<<<< HEAD
         localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
         this.closeEditDialog();
       }
@@ -150,6 +204,19 @@ export default {
     deleteMeme(index) {
       this.savedMemes.splice(index, 1);
       if (process.client) {
+=======
+
+        // Guarda en localStorage
+        localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
+
+        // Cierra el diálogo de edición
+        this.closeEditDialog();
+      }
+    },
+    deleteMeme(index) {
+      this.savedMemes.splice(index, 1);
+      if (typeof localStorage !== 'undefined') {
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
         localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
       }
     },
@@ -174,6 +241,7 @@ export default {
   justify-content: center;
 }
 
+<<<<<<< HEAD
 
 .button-container {
   margin-top: 10px;
@@ -182,6 +250,22 @@ export default {
 }
 
 
+=======
+/* Estilos para el diálogo de edición */
+.edit-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+}
+
+/* Estilos para el meme */
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 .meme-content {
   display: flex;
   flex-direction: column;
@@ -212,6 +296,7 @@ export default {
   top: 50px;
   left: -2px;
 }
+<<<<<<< HEAD
 
 .edit-button,
 .delete-button {
@@ -304,3 +389,7 @@ export default {
 }
 
 </style>
+=======
+/* Resto del estilo... */
+</style>
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53

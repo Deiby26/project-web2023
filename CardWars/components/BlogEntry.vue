@@ -9,7 +9,10 @@
       <button @click="editEntry" class="edit-button">Editar</button>
     </div>
 
+<<<<<<< HEAD
     <!-- Modal de Edición -->
+=======
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
     <div v-if="isEditModalOpen" class="edit-modal">
       <div class="edit-modal-content">
         <h3>Editar Entrada</h3>
@@ -63,6 +66,10 @@ export default {
 };
 </script>
   
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 <style scoped>
 .blog-entry {
     border: 1px solid #ccc;
@@ -101,7 +108,11 @@ export default {
 
 }
 .edit-button {
+<<<<<<< HEAD
   background-color: #00be00; /* Cambia a verde (puedes ajustar el color según tus preferencias) */
+=======
+  background-color: #00be00; 
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
   color: #fff;
 }
 
@@ -154,6 +165,7 @@ button {
   color: #fff;
 }
 
+<<<<<<< HEAD
 .meme-selection {
   margin-top: 10px;
 }
@@ -166,6 +178,8 @@ button {
   max-width: 25%; /* El meme se muestra a un cuarto de su tamaño original */
 }
 
+=======
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 </style>
   
   

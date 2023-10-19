@@ -1,13 +1,13 @@
 <template>
-    <center>
-        <div>
-            <h1 id="Create-Your-Card">Create Your Card</h1>
-            <br>
-            <br>
-            <card-creator />
-            <nuxt-link to="/MyCardsPage" id="Ver-Mis-Cartas">Ver Mis Cartas</nuxt-link>
-        </div>
-    </center>
+  <center>
+    <div>
+      <h1 id="Create-Your-Card">Crea tu carta</h1>
+      <br>
+      <br>
+      <card-creator />
+      <nuxt-link to="/MyCardsPage" id="Ver-Mis-Cartas">Ver Mis Cartas</nuxt-link>
+    </div>
+  </center>
 </template>
   
 <script>
@@ -21,14 +21,14 @@ export default {
 </script>
 
 <style>
-#Create-Your-Card{
+#Create-Your-Card {
   font-family: sans-serif;
   color: white;
   text-align: center;
   margin-top: 100px;
 }
 
-#Ver-Mis-Cartas{
+#Ver-Mis-Cartas {
   font-family: sans-serif;
   color: white;
 }

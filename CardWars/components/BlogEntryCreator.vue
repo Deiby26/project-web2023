@@ -10,6 +10,7 @@
         <label for="description">Descripción:</label>
         <textarea v-model="description" id="description" required class="input-field textarea"></textarea>
       </div>
+<<<<<<< HEAD
       <div class="form-group">
         <label for="selectedMeme">Selecciona un Meme:</label>
       <select v-model="selectedMeme" id="selectedMeme" required class="input-field">
@@ -24,11 +25,19 @@
   </div>
 </template>
   
+=======
+      <button type="submit">Crear Entrada</button>
+    </form>
+  </div>
+</template>
+
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 <script>
 export default {
   data() {
     return {
       title: '',
+<<<<<<< HEAD
       description: '',
       selectedMeme: '', // Agregamos el dato seleccionado para el meme
     };
@@ -63,6 +72,27 @@ export default {
 };
 </script>
   
+=======
+      description: ''
+    };
+  },
+  methods: {
+      createEntry() {
+  const entry = {
+    title: this.title,
+    description: this.description
+  };
+
+  this.$emit('new-entry', entry);
+
+  this.title = '';
+  this.description = '';
+}
+  }
+};
+</script>
+
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 <style scoped>
 .form-group {
   margin-bottom: 10px;
@@ -105,6 +135,7 @@ button:hover {
   margin: auto;
   text-align: center;
   color: white;
+<<<<<<< HEAD
   margin-top: 15px;
 }
 
@@ -122,10 +153,26 @@ button:hover {
   /* El label toma el espacio disponible */
   margin-top: 20px;
   /* Agrega un margen en la parte inferior del label */
+=======
+  margin-top: 50px;
+}
+
+.form-group {
+margin-bottom: 10px;
+display: flex; 
+justify-content: center; 
+}
+
+.form-group label {
+color: white;
+flex: 1; 
+margin-top: 20px; 
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53
 }
 
 .input-field,
 .textarea {
+<<<<<<< HEAD
   flex: 2;
   /* El campo de entrada toma más espacio */
 }
@@ -141,3 +188,13 @@ button:hover {
 }
 </style>
   
+=======
+flex: 2; 
+}
+
+.button-container {
+display: flex;
+justify-content: space-around; 
+}
+</style>
+>>>>>>> 982e43dc5188cf9d2d12f5eada28b5da3d638f53

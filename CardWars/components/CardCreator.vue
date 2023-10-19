@@ -2,24 +2,24 @@
   <center>
     <div class="card-creator">
       <div class="color-picker">
-        <h3>Select Color:</h3>
+        <h3>Seleccionar color:</h3>
         <input type="color" v-model="selectedColor" />
       </div>
 
       <div class="font-picker">
-        <h3>Select Font:</h3>
+        <h3>Seleccionar tipo de fuente:</h3>
         <select v-model="selectedFont">
           <option v-for="font in availableFonts" :key="font" :value="font">{{ font }}</option>
         </select>
       </div>
 
-      <textarea v-model="cardContent" placeholder="Enter your card content"></textarea>
+      <textarea v-model="cardContent" placeholder="Ingresa la descripción"></textarea>
 
-      <button @click="createCard" class="create-button">Create Card</button>
+      <button @click="createCard" class="create-button">Crear carta</button>
 
       <div v-if="cardCreated" class="card" :style="cardStyle">{{ cardContent }}</div>
 
-      <button @click="saveCard" class="save-button">Save Card</button>
+      <button @click="saveCard" class="save-button">Guardar carta</button>
     </div>
   </center>
 </template>
@@ -97,10 +97,10 @@ button {
   margin-bottom: 10px;
 }
 
-input[type="color"]{
-    height: 35px;
-    padding: 0;
-    cursor: grab;
+input[type="color"] {
+  height: 35px;
+  padding: 0;
+  cursor: grab;
 }
 
 button {
@@ -138,11 +138,13 @@ h3 {
 
 
 .create-button {
-  background-color: #28a745; /* Cambia el color para el botón "Create" */
+  background-color: #28a745;
+  /* Cambia el color para el botón "Create" */
 }
 
 .save-button {
-  background-color: #007bff; /* Cambia el color para el botón "Save" */
+  background-color: #007bff;
+  /* Cambia el color para el botón "Save" */
 }
 
 form button:hover {
