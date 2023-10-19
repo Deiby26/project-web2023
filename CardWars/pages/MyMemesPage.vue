@@ -4,7 +4,7 @@
     <div class="meme-container">
       <div v-for="(meme, index) in savedMemes" :key="index" class="meme-item">
 
-        <div class="meme-content" :style="memeStyle(meme)">
+        <div :id="'memeContent_' + index" class="meme-content" :style="memeStyle(meme)">
           <img :src="meme.image" alt="Meme Image" class="meme-image" />
           <div class="card-title" :style="cardTitleStyle(meme)">
             {{ meme.title }}
@@ -16,6 +16,7 @@
         <div class="button-container">
           <button @click="editMeme(index)" class="edit-button">Editar</button>
           <button @click="deleteMeme(index)" class="delete-button">Eliminar</button>
+          <button @click="downloadMeme(index)" class="download-button">Descargar</button>
         </div>
       </div>
     </div>
@@ -56,6 +57,9 @@
 </template>
 
 <script>
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 export default {
   data() {
     return {
@@ -137,15 +141,15 @@ export default {
     },
     saveEditedMeme() {
       if (process.client) {
-      if (this.editMemeIndex !== null) {
-        this.savedMemes[this.editMemeIndex].title = this.editedMemeTitle;
-        this.savedMemes[this.editMemeIndex].image = this.editedMemeImage;
-        this.savedMemes[this.editMemeIndex].template = this.editedMemeTemplate;
-        this.savedMemes[this.editMemeIndex].card = this.editedMemeCard;
-        localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
-        this.closeEditDialog();
+        if (this.editMemeIndex !== null) {
+          this.savedMemes[this.editMemeIndex].title = this.editedMemeTitle;
+          this.savedMemes[this.editMemeIndex].image = this.editedMemeImage;
+          this.savedMemes[this.editMemeIndex].template = this.editedMemeTemplate;
+          this.savedMemes[this.editMemeIndex].card = this.editedMemeCard;
+          localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
+          this.closeEditDialog();
+        }
       }
-    }
     },
     deleteMeme(index) {
       this.savedMemes.splice(index, 1);
@@ -153,6 +157,20 @@ export default {
         localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
       }
     },
+    downloadMeme(index) {
+      const content = document.getElementById('memeContent_' + index);
+
+      html2canvas(content).then(canvas => {
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'meme.png';
+          link.click();
+          URL.revokeObjectURL(url);
+        });
+      });
+    }
   },
 };
 </script>
@@ -213,6 +231,7 @@ export default {
   left: -2px;
 }
 
+.download-button,
 .edit-button,
 .delete-button {
   margin: 10px;
@@ -240,6 +259,12 @@ export default {
   background-color: #f44336;
   color: #fff;
 }
+
+.download-button {
+  background-color: #fff706;
+  color: #fff;
+}
+
 .edit-dialog {
   position: fixed;
   top: 50%;
@@ -294,13 +319,14 @@ export default {
 }
 
 .buttons button:first-child {
-  background-color: #4caf50; /* Verde */
+  background-color: #4caf50;
+  /* Verde */
   color: #ffffff;
 }
 
 .buttons button:last-child {
-  background-color: #f44336; /* Rojo */
+  background-color: #f44336;
+  /* Rojo */
   color: #ffffff;
 }
-
 </style>
