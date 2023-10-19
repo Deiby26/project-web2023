@@ -2,12 +2,7 @@
   <div class="blog-page">
     <h1 id="Blog">Blog</h1>
     <BlogEntryCreator @new-entry="addNewEntry" />
-    <BlogEntry
-      v-for="(entry, index) in blogEntries"
-      :key="index"
-      :entry="entry"
-      @delete-entry="deleteEntry"
-    />
+    <BlogEntry v-for="(entry, index) in blogEntries" :key="index" :entry="entry" @delete-entry="deleteEntry" />
   </div>
 </template>
 

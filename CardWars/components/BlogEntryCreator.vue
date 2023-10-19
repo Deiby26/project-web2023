@@ -55,7 +55,7 @@ export default {
 }
 
 .textarea {
-  height: 150px; /* Ajusta la altura del textarea según tu preferencia */
+  height: 150px;
 }
 
 button {

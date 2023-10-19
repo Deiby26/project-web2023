@@ -1,32 +1,32 @@
-  <template>
-    <center>
-      <div class="container">
-        <div class="col-2">
-          <div class="styled-div">
+<template>
+  <center>
+    <div class="container">
+      <div class="col-2">
+        <div class="styled-div">
+          <br>
+          <form @submit="submitlogin">
             <br>
-            <form @submit="submitlogin">
-              <br>
-              <p id="Username">USERNAME</p>
-              <input type="text" placeholder="Your Username here" v-model="usernamel" required>
-              <p id="Email-Address">EMAIL ADDRESS</p>
-              <input type="email" placeholder="Your Email here" v-model="emaill" required>
-              <p id="Password">PASSWORD</p>
-              <input type="password" placeholder="Password here" v-model="passwordl" required>
-              <button type="submit">Login</button>
-            </form>
-          </div>
+            <p id="Username">Usuario</p>
+            <input type="text" placeholder="Ingresa tu usuario" v-model="usernamel" required>
+            <p id="Email-Address">Correo electrónico</p>
+            <input type="email" placeholder="Ingresa tu correo electrónico" v-model="emaill" required>
+            <p id="Password">Contraseña</p>
+            <input type="password" placeholder="Ingresa tu contraseña" v-model="passwordl" required>
+            <button type="submit">Ingresar</button>
+          </form>
         </div>
       </div>
-    </center>
-  </template>
+    </div>
+  </center>
+</template>
 
-  <script >
+<script >
 
 definePageMeta({
-  layout: "user",
+  layout: "blank",
 });
 
-const contenedor = []; 
+const contenedor = [];
 export default {
   data() {
     return {
@@ -35,94 +35,94 @@ export default {
       passwordl: ''
     };
   },
-  
+
   methods: {
-  submitlogin(event) {
-    event.preventDefault();
-    const contenedor = []; 
+    submitlogin(event) {
+      event.preventDefault();
+      const contenedor = [];
 
-    var objetoRecuperado = JSON.parse(localStorage.getItem('JSON'));
-    const nombrelogin = this.usernamel;
-    const nombrelocalstorage = objetoRecuperado["username"];
+      var objetoRecuperado = JSON.parse(localStorage.getItem('JSON'));
+      const nombrelogin = this.usernamel;
+      const nombrelocalstorage = objetoRecuperado["username"];
 
-    const sonIgualesnombre = nombrelogin === nombrelocalstorage;
-    if (sonIgualesnombre == true){
-      contenedor.push(true);
-    } else {
-      contenedor.push(false);
-    }
+      const sonIgualesnombre = nombrelogin === nombrelocalstorage;
+      if (sonIgualesnombre == true) {
+        contenedor.push(true);
+      } else {
+        contenedor.push(false);
+      }
 
-    const correol = this.emaill;
-    const correolocalstorage = objetoRecuperado["email"];
+      const correol = this.emaill;
+      const correolocalstorage = objetoRecuperado["email"];
 
-    const sonIgualescorreo = correol === correolocalstorage;
-    if (sonIgualescorreo == true){
-      contenedor.push(true);
-    } else {
-      contenedor.push(false);
-    }
+      const sonIgualescorreo = correol === correolocalstorage;
+      if (sonIgualescorreo == true) {
+        contenedor.push(true);
+      } else {
+        contenedor.push(false);
+      }
 
-    const contral = this.passwordl;
-    const passwordlocalstorage = objetoRecuperado["password"];
-    const sonIgualescontra = contral === passwordlocalstorage;
+      const contral = this.passwordl;
+      const passwordlocalstorage = objetoRecuperado["password"];
+      const sonIgualescontra = contral === passwordlocalstorage;
 
-    if (sonIgualescontra == true){
-      contenedor.push(true);
-    } else {
-      contenedor.push(false);
-    }
+      if (sonIgualescontra == true) {
+        contenedor.push(true);
+      } else {
+        contenedor.push(false);
+      }
 
 
 
-    console.log(contenedor)
-    var contador = 0
-    for (var i = 0; i < contenedor.length; i++) {
-      var elemento = contenedor[i];
-      if (elemento === true) {
-        contador++;
-      }else{
-        continue
+      console.log(contenedor)
+      var contador = 0
+      for (var i = 0; i < contenedor.length; i++) {
+        var elemento = contenedor[i];
+        if (elemento === true) {
+          contador++;
+        } else {
+          continue
+        }
+      }
+      if (contador === 3) {
+        window.alert("INCIO DE SESIÓN")
+        this.$router.push('/Home');
+      } else {
+        window.alert("LAS CREDECIALES NO COINCIDEN")
+
       }
     }
-    if (contador === 3){
-      window.alert("INCIO DE SESIÓN")
-      this.$router.push('/Home');
-    }else{
-      window.alert("LAS CREDECIALES NO COINCIDEN")
-      
-    }
-  }
-    
-  }
-  };
 
-  </script>
-
-  <style>
-  .styled-div {
-    background-color: rgba(233, 38, 200, 0.5);
-    width: 600px; 
-    height: 350px; 
-    border-radius: 20px;
   }
+};
 
-  #Username{
-    font-family: sans-serif;
-    color: white;
-  }
+</script>
 
-  #Email-Address{
-    font-family: sans-serif;
-    color: white;
-  }
+<style>
+.styled-div {
+  background-color: rgba(233, 38, 200, 0.5);
+  width: 600px;
+  height: 350px;
+  border-radius: 20px;
+}
 
-  #Password{
-    font-family: sans-serif;
-    color: white;
-  }
+#Username {
+  font-family: sans-serif;
+  color: white;
+}
 
-  #Login{
-    font-family: sans-serif;
-    color: white;
-  }
-  </style>
+#Email-Address {
+  font-family: sans-serif;
+  color: white;
+}
+
+#Password {
+  font-family: sans-serif;
+  color: white;
+}
+
+#Login {
+  font-family: sans-serif;
+  color: white;
+}
+</style>

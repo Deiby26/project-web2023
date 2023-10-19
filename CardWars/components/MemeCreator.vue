@@ -3,14 +3,12 @@
     <div>
       <h1 id="Mis-Memes">Mis Memes</h1>
 
-      <!-- Selector de plantillas -->
       <select v-model="selectedTemplate" class="template-selector">
         <option v-for="template in availableTemplates" :key="template" :value="template">
           {{ template }}
         </option>
       </select>
 
-      <!-- Selector de cartas -->
       <select v-model="selectedCard" class="template-selector">
         <option v-for="(card, index) in savedCards" :key="index" :value="card">
           Carta {{ index + 1 }}
@@ -18,23 +16,19 @@
       </select>
 
       <div class="title-input-container">
-        <!-- Campo de entrada para el título -->
-        <input v-model="memeTitle" type="text" placeholder="Enter meme title" class="template-selector" maxlength="16">
+        <input v-model="memeTitle" type="text" placeholder="Ingresar titulo del meme" class="template-selector"
+          maxlength="50">
 
-        <!-- Input de color para el título -->
         <input v-model="titleColor" type="color" class="color-input title-color-input">
       </div>
 
-      <!-- Input para cargar una imagen -->
-      <input type="file" accept="image/*" @change="handleImageUpload" class="template-selector" />
+      <input type="file" accept="image/*" @change="handleImageUpload"
+        class="template-selector with-white-border-and-background" />
 
-      <!-- Botón para crear meme -->
-      <button @click="createMeme" class="create-button">Create Meme</button>
+      <button @click="createMeme" class="create-button">Crear meme</button>
 
-      <!-- Botón para guardar meme -->
-      <button @click="saveMeme" class="create-button">Save Meme</button>
+      <button @click="saveMeme" class="create-button">Guardar meme</button>
 
-      <!-- Contenedor para mostrar el meme -->
       <div v-if="memeCreated" class="meme-container" :style="memeStyle">
         <div class="meme-content">
           <img :src="memeImage" alt="Meme Image" class="meme-image" />
@@ -87,7 +81,7 @@ export default {
         position: 'relative',
         top: '732px',
         left: '0px',
-        margin: 'auto',  // Agregamos esta línea
+        margin: 'auto',
       };
     }
   },
@@ -108,7 +102,6 @@ export default {
       }
     },
     saveMeme() {
-      // Guardar el meme completo incluyendo meme-container
       const memeContainer = document.querySelector('.meme-container').outerHTML;
       const meme = {
         template: this.selectedTemplate,
@@ -116,11 +109,11 @@ export default {
         title: this.memeTitle,
         color: this.titleColor,
         image: this.memeImage,
-        memeContainer: memeContainer  // Agregar meme-container
+        memeContainer: memeContainer
       };
       this.savedMemes.push(meme);
       localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
-      alert('Meme saved successfully!');
+      alert('¡Meme guardado correctamente!');
     }
   },
   created() {
@@ -187,6 +180,8 @@ export default {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  max-width: 550px;
+  width: 100%;
 }
 
 .title-input-container input {
@@ -206,6 +201,10 @@ export default {
   top: 163px;
   right: 61px;
 }
+
+.with-white-border-and-background {
+  border: 2px solid white;
+  background-color: white;
+}
 </style>
 
-  
