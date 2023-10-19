@@ -86,14 +86,12 @@ export default {
         window.alert("Las contraseñas no coinciden")
       }
 
-    }
-  },
-  methods: {
+    },
     regresarindex(){
       this.$router.push('/');
 
     }
-
+    
   }
 };
 
