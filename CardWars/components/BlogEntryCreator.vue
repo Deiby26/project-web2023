@@ -24,14 +24,17 @@ export default {
     };
   },
   methods: {
-    createEntry() {
-      this.$emit('new-entry', {
-        title: this.title,
-        description: this.description
-      });
-      this.title = '';
-      this.description = '';
-    }
+      createEntry() {
+  const entry = {
+    title: this.title,
+    description: this.description
+  };
+
+  this.$emit('new-entry', entry);
+
+  this.title = '';
+  this.description = '';
+}
   }
 };
 </script>
@@ -39,6 +42,7 @@ export default {
 <style scoped>
 .form-group {
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .form-group label {
@@ -77,5 +81,28 @@ button:hover {
   margin: auto;
   text-align: center;
   color: white;
+  margin-top: 50px;
+}
+
+.form-group {
+margin-bottom: 10px;
+display: flex; 
+justify-content: center; 
+}
+
+.form-group label {
+color: white;
+flex: 1; 
+margin-top: 20px; 
+}
+
+.input-field,
+.textarea {
+flex: 2; 
+}
+
+.button-container {
+display: flex;
+justify-content: space-around; 
 }
 </style>
