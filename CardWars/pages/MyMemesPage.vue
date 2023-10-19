@@ -16,6 +16,7 @@
         <div class="button-container">
           <button @click="editMeme(index)" class="edit-button">Editar</button>
           <button @click="deleteMeme(index)" class="delete-button">Eliminar</button>
+          <button @click="downloadMeme(meme)" class="download-button">Descargar</button>
         </div>
       </div>
     </div>
@@ -56,6 +57,9 @@
 </template>
 
 <script>
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 export default {
   data() {
     return {
@@ -153,6 +157,18 @@ export default {
         localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
       }
     },
+    downloadMeme(meme) {
+      const content = document.querySelector('.meme-content');
+
+      html2canvas(content).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(imgData, 'PNG', 0, 0, 210, 297);
+        
+        pdf.save('meme.pdf');
+      });
+    }
   },
 };
 </script>
@@ -213,6 +229,7 @@ export default {
   left: -2px;
 }
 
+.download-button,
 .edit-button,
 .delete-button {
   margin: 10px;
@@ -238,6 +255,11 @@ export default {
 
 .delete-button {
   background-color: #f44336;
+  color: #fff;
+}
+
+.download-button {
+  background-color: #fff706;
   color: #fff;
 }
 .edit-dialog {
@@ -302,5 +324,6 @@ export default {
   background-color: #f44336; /* Rojo */
   color: #ffffff;
 }
+
 
 </style>
