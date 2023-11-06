@@ -20,7 +20,6 @@
         </div>
       </div>
     </div>
-
     <div v-if="isEditDialogOpen" class="edit-dialog">
       <h2>Editar Meme</h2>
       <div class="form-group">
@@ -56,124 +55,6 @@
   </div>
 </template>
 
-<script>
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
-
-export default {
-  data() {
-    return {
-      savedMemes: [],
-      isEditDialogOpen: false,
-      editMemeIndex: null,
-      editedMemeTitle: '',
-      editedMemeImage: '',
-      editedMemeTemplate: null,
-      editedMemeCard: null,
-      availableTemplates: ['Amarillo', 'Azul', 'Morado', 'Negro', 'Galaxia', 'Oro'],
-    };
-  },
-  created() {
-    if (process.client) {
-      this.savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || [];
-      this.savedCards = this.savedMemes.map(meme => meme.card);
-    }
-  },
-  methods: {
-    editMeme(index) {
-      this.isEditDialogOpen = true;
-      this.editMemeIndex = index;
-      this.editedMemeTitle = this.savedMemes[index].title;
-      this.editedMemeImage = this.savedMemes[index].image;
-      this.editedMemeTemplate = this.savedMemes[index].template;
-      this.editedMemeCard = this.savedMemes[index].card;
-    },
-    closeEditDialog() {
-      this.isEditDialogOpen = false;
-      this.editMemeIndex = null;
-      this.editedMemeTitle = '';
-      this.editedMemeImage = '';
-      this.editedMemeTemplate = null;
-      this.editedMemeCard = null;
-    },
-    handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.editedMemeImage = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    },
-    memeStyle(meme) {
-      return {
-        backgroundImage: `url('/cardimgs/${meme.template}.jpeg')`,
-        backgroundSize: 'cover',
-        width: '650px',
-        height: '965.5px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-      };
-    },
-    cardTitleStyle(meme) {
-      return {
-        fontFamily: meme.card.font,
-        color: meme.color,
-        fontSize: '55px',
-        fontWeight: 'bold',
-        marginBottom: '10px',
-        textAlign: 'center',
-      };
-    },
-    cardStyle(meme) {
-      return {
-        backgroundColor: meme.card.backgroundColor,
-        fontFamily: meme.card.font,
-        width: '603px',
-        height: '196px',
-        padding: '20px',
-        border: '1px solid #ccc',
-        textAlign: 'center',
-      };
-    },
-    saveEditedMeme() {
-      if (process.client) {
-        if (this.editMemeIndex !== null) {
-          this.savedMemes[this.editMemeIndex].title = this.editedMemeTitle;
-          this.savedMemes[this.editMemeIndex].image = this.editedMemeImage;
-          this.savedMemes[this.editMemeIndex].template = this.editedMemeTemplate;
-          this.savedMemes[this.editMemeIndex].card = this.editedMemeCard;
-          localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
-          this.closeEditDialog();
-        }
-      }
-    },
-    deleteMeme(index) {
-      this.savedMemes.splice(index, 1);
-      if (process.client) {
-        localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
-      }
-    },
-    downloadMeme(index) {
-      const content = document.getElementById('memeContent_' + index);
-
-      html2canvas(content).then(canvas => {
-        canvas.toBlob(blob => {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'meme.png';
-          link.click();
-          URL.revokeObjectURL(url);
-        });
-      });
-    }
-  },
-};
-</script>
 <style scoped>
 #Mis-Memes {
   font-family: sans-serif;
@@ -192,13 +73,11 @@ export default {
   justify-content: center;
 }
 
-
 .button-container {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
-
 
 .meme-content {
   display: flex;
@@ -328,3 +207,130 @@ export default {
   color: #ffffff;
 }
 </style>
+
+<script>
+import html2canvas from 'html2canvas';
+
+export default {
+  data() {
+    return {
+      savedMemes: [],
+      isEditDialogOpen: false,
+      editMemeIndex: null,
+      editedMemeTitle: '',
+      editedMemeImage: '',
+      editedMemeTemplate: null,
+      editedMemeCard: null,
+      availableTemplates: ['Amarillo', 'Azul', 'Morado', 'Negro', 'Galaxia', 'Oro'],
+    };
+  },
+
+  created() {
+    if (process.client) {
+      this.savedMemes = JSON.parse(localStorage.getItem('savedMemes')) || [];
+      this.savedCards = this.savedMemes.map(meme => meme.card);
+    }
+  },
+
+  methods: {
+    editMeme(index) {
+      this.isEditDialogOpen = true;
+      this.editMemeIndex = index;
+      this.editedMemeTitle = this.savedMemes[index].title;
+      this.editedMemeImage = this.savedMemes[index].image;
+      this.editedMemeTemplate = this.savedMemes[index].template;
+      this.editedMemeCard = this.savedMemes[index].card;
+    },
+
+    closeEditDialog() {
+      this.isEditDialogOpen = false;
+      this.editMemeIndex = null;
+      this.editedMemeTitle = '';
+      this.editedMemeImage = '';
+      this.editedMemeTemplate = null;
+      this.editedMemeCard = null;
+    },
+
+    handleImageUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.editedMemeImage = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    },
+
+    memeStyle(meme) {
+      return {
+        backgroundImage: `url('/cardimgs/${meme.template}.jpeg')`,
+        backgroundSize: 'cover',
+        width: '650px',
+        height: '965.5px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+    },
+
+    cardTitleStyle(meme) {
+      return {
+        fontFamily: meme.card.font,
+        color: meme.color,
+        fontSize: '55px',
+        fontWeight: 'bold',
+        marginBottom: '10px',
+        textAlign: 'center',
+      };
+    },
+
+    cardStyle(meme) {
+      return {
+        backgroundColor: meme.card.backgroundColor,
+        fontFamily: meme.card.font,
+        width: '603px',
+        height: '196px',
+        padding: '20px',
+        border: '1px solid #ccc',
+        textAlign: 'center',
+      };
+    },
+
+    saveEditedMeme() {
+      if (process.client) {
+        if (this.editMemeIndex !== null) {
+          this.savedMemes[this.editMemeIndex].title = this.editedMemeTitle;
+          this.savedMemes[this.editMemeIndex].image = this.editedMemeImage;
+          this.savedMemes[this.editMemeIndex].template = this.editedMemeTemplate;
+          this.savedMemes[this.editMemeIndex].card = this.editedMemeCard;
+          localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
+          this.closeEditDialog();
+        }
+      }
+    },
+
+    deleteMeme(index) {
+      this.savedMemes.splice(index, 1);
+      if (process.client) {
+        localStorage.setItem('savedMemes', JSON.stringify(this.savedMemes));
+      }
+    },
+
+    downloadMeme(index) {
+      const content = document.getElementById('memeContent_' + index);
+      html2canvas(content).then(canvas => {
+        canvas.toBlob(blob => {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'meme.png';
+          link.click();
+          URL.revokeObjectURL(url);
+        });
+      });
+    }
+  },
+}
+</script>

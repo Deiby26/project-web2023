@@ -9,10 +9,8 @@
             <p style="color: white;">Nombre: {{ nombrelocalstorage }}</p>
             <p style="color: white;">Correo: {{ emailstorage }}</p>
             <p style="color: white;">Contraseña: {{ passwordstorage }}</p>
-        </div>
-        <br>
+        </div><br>
         <div class="contenedoreliminar" v-show="showForm">
-
             <input type="text" placeholder="Nuevo Nombre" v-model="newUsername">
             <input type="text" placeholder="Nuevo Correo" v-model="newEmail">
             <input type="text" placeholder="Nueva Contraseña" v-model="newPassword">
@@ -20,67 +18,6 @@
         </div>
     </center>
 </template>
-  
-<script>
-export default {
-    data() {
-        return {
-            username: '',
-            email: '',
-            password: '',
-            nombrelocalstorage: '',
-            showInfo: false,
-            showForm: false,
-            newUsername: '',
-            newEmail: '',
-            newPassword: ''
-        };
-    },
-    methods: {
-        submitconfig(event) {
-            event.preventDefault();
-            var objetoRecuperado = JSON.parse(localStorage.getItem('JSON'));
-            this.nombrelocalstorage = objetoRecuperado["username"];
-            this.emailstorage = objetoRecuperado['email'];
-            this.passwordstorage = objetoRecuperado['password'];
-        },
-        crudeliminar() {
-            const confirmDelete = window.confirm("Esta acción no podrá ser reversible. ¿Estás seguro?");
-            if (confirmDelete) {
-                localStorage.removeItem('JSON');
-                localStorage.clear();
-                this.$router.push('/');
-            }
-        },
-        updateUser() {
-            
-            const newUserData = {
-                username: this.newUsername,
-                email: this.newEmail,
-                password: this.newPassword
-            };
-
-
-            const newUserDataJSON = JSON.stringify(newUserData);
-
-            localStorage.setItem('JSON', newUserDataJSON);
-
-            this.newUsername = '';
-            this.newEmail = '';
-            this.newPassword = '';
-            this.showForm = false;
-
-            this.nombrelocalstorage = newUserData.username;
-            this.emailstorage = newUserData.email;
-            this.passwordstorage = newUserData.password;
-        }
-
-    }
-};
-</script>
-  
-
-  
 
 <style>
 #Login {
@@ -95,7 +32,6 @@ export default {
     height: 85px;
     width: 400px;
     border-radius: 20px;
-
 }
 
 .contenedoreliminar {
@@ -124,6 +60,7 @@ export default {
     cursor: pointer;
     font-size: 16px;
 }
+
 .contenedoreliminar {
     background-color: #f0f0f0;
     padding: 20px;
@@ -131,26 +68,78 @@ export default {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     height: 300px;
     width: 400px;
-  }
+}
 
-  .contenedoreliminar input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 40px;
-  }
+.contenedoreliminar input {
+width: 100%;
+padding: 10px;
+margin-bottom: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+height: 40px;
+}
 
-  .contenedoreliminar button {
-    background-color: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
+.contenedoreliminar button {
+background-color: #007BFF;
+color: #fff;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+font-size: 16px;
+}
 </style>
 
+<script>
+export default {
+    data() {
+        return {
+            username: '',
+            email: '',
+            password: '',
+            nombrelocalstorage: '',
+            showInfo: false,
+            showForm: false,
+            newUsername: '',
+            newEmail: '',
+            newPassword: ''
+        };
+    },
+
+    methods: {
+        submitconfig(event) {
+            event.preventDefault();
+            var objetoRecuperado = JSON.parse(localStorage.getItem('JSON'));
+            this.nombrelocalstorage = objetoRecuperado["username"];
+            this.emailstorage = objetoRecuperado['email'];
+            this.passwordstorage = objetoRecuperado['password'];
+        },
+
+        crudeliminar() {
+            const confirmDelete = window.confirm("Esta acción no podrá ser reversible. ¿Estás seguro?");
+            if (confirmDelete) {
+                localStorage.removeItem('JSON');
+                localStorage.clear();
+                this.$router.push('/');
+            }
+        },
+
+        updateUser() {
+            const newUserData = {
+                username: this.newUsername,
+                email: this.newEmail,
+                password: this.newPassword
+            };
+            const newUserDataJSON = JSON.stringify(newUserData);
+            localStorage.setItem('JSON', newUserDataJSON);
+            this.newUsername = '';
+            this.newEmail = '';
+            this.newPassword = '';
+            this.showForm = false;
+            this.nombrelocalstorage = newUserData.username;
+            this.emailstorage = newUserData.email;
+            this.passwordstorage = newUserData.password;
+        }
+    }
+}
+</script>

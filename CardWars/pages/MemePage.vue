@@ -5,6 +5,13 @@
   </div>
 </template>
   
+<style scoped>
+.meme-page {
+  text-align: center;
+  margin-top: 50px;
+}
+</style>
+  
 <script>
 import MemeCreator from '@/components/MemeCreator.vue';
 
@@ -12,18 +19,5 @@ export default {
   components: {
     MemeCreator
   }
-};
+}
 </script>
-  
-<style scoped>
-.meme-page {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.custom-link {
-  color: white;
-}
-</style>
-  
-  

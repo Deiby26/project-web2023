@@ -133,7 +133,7 @@ export default {
       }
       if (contador === 3) {
         window.alert("INCIO DE SESIÓN")
-        this.$router.push('/Home');
+        this.$router.push('/paginaPrincipal');
       } else {
         window.alert("LAS CREDECIALES NO COINCIDEN")
       }

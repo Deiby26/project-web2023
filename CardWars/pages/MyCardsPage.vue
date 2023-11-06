@@ -43,63 +43,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      savedCards: [],
-      isEditDialogOpen: false,
-      editedCardContent: '',
-      editedCardColor: '',
-      editedCardFont: '',
-      editedCardIndex: null,
-      availableFonts: ['Arial, sans-serif', 'Times New Roman', 'Courier New']
-    };
-  },
-  created() {
-    if (typeof localStorage !== 'undefined') {
-      this.savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
-    }
-  },
-  methods: {
-    deleteCard(index) {
-      this.savedCards.splice(index, 1);
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem('savedCards', JSON.stringify(this.savedCards));
-      }
-    },
-    openEditDialog(index) {
-      this.isEditDialogOpen = true;
-      this.editedCardContent = this.savedCards[index].content;
-      this.editedCardColor = this.savedCards[index].backgroundColor || '#ffffff';
-      this.editedCardFont = this.savedCards[index].font || 'Arial, sans-serif';
-      this.editedCardIndex = index;
-    },
-    closeEditDialog() {
-      this.isEditDialogOpen = false;
-      this.editedCardContent = '';
-      this.editedCardColor = '';
-      this.editedCardFont = '';
-      this.editedCardIndex = null;
-    },
-    saveEditedCard() {
-      if (this.editedCardIndex !== null) {
-        this.savedCards[this.editedCardIndex].content = this.editedCardContent;
-        this.savedCards[this.editedCardIndex].backgroundColor = this.editedCardColor;
-        this.savedCards[this.editedCardIndex].font = this.editedCardFont;
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('savedCards', JSON.stringify(this.savedCards));
-        }
-        this.closeEditDialog();
-      }
-    },
-    toggleCardButtons(index) {
-      this.savedCards[index].showButtons = !this.savedCards[index].showButtons;
-    },
-  }
-};
-</script>
-
 <style scoped>
 .card-container {
   display: flex;
@@ -161,18 +104,6 @@ button {
   align-items: center;
 }
 
-.card-buttons {
-  margin-left: 2%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.card-buttons button {
-  margin-top: 1px;
-  width: 100px;
-}
-
 .form-group {
   margin-bottom: 10px;
 }
@@ -231,16 +162,76 @@ select {
   transform: scale(1.05); 
 }
 
-
 .more-info-icon {
   cursor: pointer;
   width: 50px; 
   height: 50px; 
   transition: transform 0.3s;
-  
 }
 
 .more-info-icon:hover {
   transform: scale(1.1); 
 }
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      savedCards: [],
+      isEditDialogOpen: false,
+      editedCardContent: '',
+      editedCardColor: '',
+      editedCardFont: '',
+      editedCardIndex: null,
+      availableFonts: ['Arial, sans-serif', 'Times New Roman', 'Courier New']
+    };
+  },
+
+  created() {
+    if (typeof localStorage !== 'undefined') {
+      this.savedCards = JSON.parse(localStorage.getItem('savedCards')) || [];
+    }
+  },
+
+  methods: {
+    deleteCard(index) {
+      this.savedCards.splice(index, 1);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('savedCards', JSON.stringify(this.savedCards));
+      }
+    },
+    openEditDialog(index) {
+      this.isEditDialogOpen = true;
+      this.editedCardContent = this.savedCards[index].content;
+      this.editedCardColor = this.savedCards[index].backgroundColor || '#ffffff';
+      this.editedCardFont = this.savedCards[index].font || 'Arial, sans-serif';
+      this.editedCardIndex = index;
+    },
+
+    closeEditDialog() {
+      this.isEditDialogOpen = false;
+      this.editedCardContent = '';
+      this.editedCardColor = '';
+      this.editedCardFont = '';
+      this.editedCardIndex = null;
+    },
+
+    saveEditedCard() {
+      if (this.editedCardIndex !== null) {
+        this.savedCards[this.editedCardIndex].content = this.editedCardContent;
+        this.savedCards[this.editedCardIndex].backgroundColor = this.editedCardColor;
+        this.savedCards[this.editedCardIndex].font = this.editedCardFont;
+        if (typeof localStorage !== 'undefined') {
+          localStorage.setItem('savedCards', JSON.stringify(this.savedCards));
+        }
+        this.closeEditDialog();
+      }
+    },
+
+    toggleCardButtons(index) {
+      this.savedCards[index].showButtons = !this.savedCards[index].showButtons;
+    },
+  }
+}
+</script>

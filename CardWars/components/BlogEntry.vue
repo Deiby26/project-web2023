@@ -5,8 +5,8 @@
       <p>{{ entry.description }}</p>
     </div>
     <div class="button-container">
-      <button @click="deleteEntry">Eliminar</button>
-      <button @click="editEntry" class="edit-button">Editar</button>
+      <button @click="deleteEntry" id="eliminar">Eliminar</button>
+      <button @click="editEntry" id="editar">Editar</button>
     </div>
 
     <div v-if="isEditModalOpen" class="edit-modal">
@@ -27,95 +27,60 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    entry: Object
-  },
-  data() {
-    return {
-      isEditModalOpen: false,
-      editedTitle: this.entry.title,
-      editedDescription: this.entry.description
-    };
-  },
-  methods: {
-    deleteEntry() {
-      this.$emit('delete-entry', this.entry);
-    },
-    editEntry() {
-      this.isEditModalOpen = true;
-    },
-    closeEditModal() {
-      this.isEditModalOpen = false;
-    },
-    saveChanges() {
-      const updatedEntry = {
-        ...this.entry,
-        title: this.editedTitle,
-        description: this.editedDescription
-      };
-      this.$emit('update-entry', updatedEntry);
-      this.closeEditModal();
-    }
-  }
-};
-</script>
-  
 <style scoped>
 .blog-entry {
-    border: 1px solid #ccc;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    width: 50%;
-    margin: auto;
-    max-width: 800px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  max-width: 800px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .blog-info {
-    color: #000;
+  color: #000;
 }
 
 .blog-info h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .blog-info h2::after {
-    content: "";
-    display: block;
-    width: 100%;
-    border-bottom: 2px solid #db3e3e;
-    margin-top: 8px;
-
+  content: "";
+  display: block;
+  width: 100%;
+  border-bottom: 2px solid #db3e3e;
+  margin-top: 8px;
 }
 
 .blog-info p {
-    font-size: 18px;
-
+  font-size: 18px;
 }
-.edit-button {
-  background-color: #00be00; 
+
+#editar {
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #00be00;
   color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-
-button {
-    margin: 10px;
-    padding: 8px 16px;
-    background-color: #ff0000;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+#eliminar{
+  margin: 10px;
+  padding: 8px 16px;
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-
-
 
 .edit-modal-content {
   text-align: center;
@@ -152,19 +117,42 @@ button {
   background-color: #00ff00;
   color: #fff;
 }
-
-.meme-selection {
-  margin-top: 10px;
-}
-
-.meme-selection label {
-  margin-right: 5px;
-}
-
-.selected-meme img {
-  max-width: 25%; 
-}
-
 </style>
-  
-  
+
+<script>
+export default {
+  props: {
+    entry: Object
+  },
+  data() {
+    return {
+      isEditModalOpen: false,
+      editedTitle: this.entry.title,
+      editedDescription: this.entry.description
+    };
+  },
+  methods: {
+    deleteEntry() {
+      this.$emit('delete-entry', this.entry);
+    },
+    
+    editEntry() {
+      this.isEditModalOpen = true;
+    },
+
+    closeEditModal() {
+      this.isEditModalOpen = false;
+    },
+
+    saveChanges() {
+      const updatedEntry = {
+        ...this.entry,
+        title: this.editedTitle,
+        description: this.editedDescription
+      };
+      this.$emit('update-entry', updatedEntry);
+      this.closeEditModal();
+    }
+  }
+};
+</script>

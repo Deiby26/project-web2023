@@ -9,16 +9,6 @@
     </div>
   </center>
 </template>
-  
-<script>
-import CardCreator from '~/components/CardCreator.vue';
-
-export default {
-  components: {
-    CardCreator
-  }
-};
-</script>
 
 <style>
 #Create-Your-Card {
@@ -33,3 +23,13 @@ export default {
   color: white;
 }
 </style>
+
+<script>
+import CardCreator from '~/components/CardCreator.vue';
+
+export default {
+  components: {
+    CardCreator
+  }
+}
+</script>

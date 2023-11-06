@@ -1,6 +1,6 @@
 <template>
   <div class="entry-creator">
-    <h2>Nueva Entrada de Blog</h2>
+    <h2 id="titulo">Nueva Entrada de Blog</h2>
     <form @submit.prevent="createEntry">
       <div class="form-group">
         <label for="title">Título:</label>
@@ -23,44 +23,6 @@
     </form>
   </div>
 </template>
-  
-<script>
-export default {
-  data() {
-    return {
-      title: '',
-      description: '',
-      selectedMeme: '', 
-    };
-  },
-  computed: {
-    savedMemes() {
-      return JSON.parse(localStorage.getItem('savedMemes')) || [];
-    },
-  },
-  methods: {
-    createEntry() {
-      const entry = {
-        title: this.title,
-        description: this.description,
-        memeId: this.selectedMeme, 
-      };
-
-      this.$emit('new-entry', entry);
-
-      this.title = '';
-      this.description = '';
-      this.selectedMeme = ''; 
-    },
-    cancel() {
-    this.$emit('cancel'); 
-    this.title = '';
-    this.description = '';
-    this.selectedMeme = ''; 
-  }
-  }
-};
-</script>
   
 <style scoped>
 .form-group {
@@ -135,3 +97,40 @@ button:hover {
 }
 </style>
   
+<script>
+export default {
+  data() {
+    return {
+      title: '',
+      description: '',
+      selectedMeme: '', 
+    };
+  },
+  computed: {
+    savedMemes() {
+      return JSON.parse(localStorage.getItem('savedMemes')) || [];
+    },
+  },
+
+  methods: {
+    createEntry() {
+      const entry = {
+        title: this.title,
+        description: this.description,
+        memeId: this.selectedMeme, 
+      };
+      this.$emit('new-entry', entry);
+      this.title = '';
+      this.description = '';
+      this.selectedMeme = ''; 
+    },
+
+    cancel() {
+    this.$emit('cancel'); 
+    this.title = '';
+    this.description = '';
+    this.selectedMeme = ''; 
+  }
+  }
+}
+</script>
