@@ -2,32 +2,80 @@
   <center>
     <div class="container">
       <div class="col-2">
-        <div class="styled-div">
-          <br>
-          <form @submit="submitlogin">
-            <br>
-            <p id="Username">Usuario</p>
-            <input type="text" placeholder="Ingresa tu usuario" v-model="usernamel" required>
-            <p id="Email-Address">Correo electrónico</p>
-            <input type="email" placeholder="Ingresa tu correo electrónico" v-model="emaill" required>
-            <p id="Password">Contraseña</p>
-            <input type="password" placeholder="Ingresa tu contraseña" v-model="passwordl" required>
-            <button type="submit">Ingresar</button><br>
+        <div class="styled-div"><br>
+          <form @submit="submitlogin"><br>
+            <p style="font-size: 25px;  color: white;">Usuario</p>
+            <input id="Usuario" type="text" placeholder="Ingresa tu usuario" v-model="usernamel" required>
+            <p style="font-size: 25px;  color: white;">Correo electrónico</p>
+            <input id="Correo" type="email" placeholder="Ingresa tu correo electrónico" v-model="emaill" required>
+            <p style="font-size: 25px;  color: white;">Contraseña</p>
+            <input id="Contra" type="password" placeholder="Ingresa tu contraseña" v-model="passwordl" required><br>
+            <button id="Ingresar" type="submit">Ingresar</button><br><br>
           </form>
-          <button type="submit" @click="regresarl" class="regresarl">Regresar</button>
+          <button type="submit" @click="regresar" id="regresar">Regresar</button>
         </div>
       </div>
     </div>
   </center>
 </template>
 
-<script >
+<style>
+.styled-div {
+  background-color: rgba(233, 38, 200, 0.5);
+  width: 600px;
+  height: 480px;
+  border-radius: 20px;
+}
 
+#Usuario{
+  font-size: 20px;
+}
+
+#Correo{
+  font-size: 20px;
+}
+
+#Contra{
+  font-size: 20px;
+}
+
+#Ingresar {
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#Ingresar:hover{
+  transform: translateY(-5px);
+}
+
+#regresar {
+  background-color: green;
+  color: white;
+  font-size: 20px;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+#regresar:hover {
+  background-color: green;
+  transform: translateY(-5px);
+}
+</style>
+
+<script >
 definePageMeta({
   layout: "blank",
 });
 
-const contenedor = [];
 export default {
   data() {
     return {
@@ -73,8 +121,6 @@ export default {
         contenedor.push(false);
       }
 
-
-
       console.log(contenedor)
       var contador = 0
       for (var i = 0; i < contenedor.length; i++) {
@@ -90,55 +136,13 @@ export default {
         this.$router.push('/Home');
       } else {
         window.alert("LAS CREDECIALES NO COINCIDEN")
-
       }
     },
-    regresarl(){
+
+    regresar(){
       this.$router.push('/');
     }
   },
 };
 
 </script>
-
-<style>
-.styled-div {
-  background-color: rgba(233, 38, 200, 0.5);
-  width: 600px;
-  height: 450px;
-  border-radius: 20px;
-}
-
-#Username {
-  font-family: sans-serif;
-  color: white;
-}
-
-#Email-Address {
-  font-family: sans-serif;
-  color: white;
-}
-
-#Password {
-  font-family: sans-serif;
-  color: white;
-}
-
-#Login {
-  font-family: sans-serif;
-  color: white;
-}
-.regresarl {
-  background-color: green;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.regresarl:hover {
-  background-color: green;
-}
-</style>

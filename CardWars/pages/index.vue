@@ -1,60 +1,31 @@
 <template>
   <center>
-    <h1 id="Welcome">¡Bienvenidos a la revolución del duelo con memes!</h1>
-    <br>
-    <p id="Subtittle">¡Duelo de memes en cada carta! Despierta al creador de cartas en ti.</p>
-    <br>
-    <button type="submit" @click="redirigirlogin" class="redirigirlogin">Ingresar</button><br><br>
+    <h1 id="Bienvenido">¡Bienvenidos a la revolución del duelo con memes!</h1><br>
+    <p id="SubTitulo">¡Duelo de memes en cada carta! Despierta al creador de cartas en ti.</p><br>
+    <button type="submit" @click="redirigirIngresar" class="redirigirIngresar">Ingresar</button><br><br>
     <button type="submit" @click="redirigirRegistro" class="redirigirRegistro">Registrarse</button>
   </center>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      username: '',
-      email: '',
-      password: ''
-    };
-  },
-  methods: {
-    redirigirlogin() {
-      this.$router.push('/Login');
-
-    },
-    redirigirRegistro() {
-      this.$router.push('/SignUp');
-    }
-
-
-  }
-};
-
-
-definePageMeta({
-  layout: "blank",
-});
-
-</script>
-
 <style>
-#Welcome {
+#Bienvenido {
   font-family: sans-serif;
   color: white;
   text-align: center;
-  line-height: 300px
+  line-height: 300px;
+  font-size: 1.2cm;
 }
 
-#Subtittle {
+#SubTitulo {
   font-family: sans-serif;
   color: white;
   margin-top: -150px;
   text-align: center;
-  line-height: 50px
+  line-height: 50px;
+  font-size: 0.8cm;
 }
 
-#Got-To-Login {
+/* #Got-To-Login {
   font-family: sans-serif;
   color: white;
   text-align: center;
@@ -80,33 +51,63 @@ definePageMeta({
   color: white;
   text-align: center;
   line-height: 50px;
-}
+} */
 
-.redirigirlogin {
+.redirigirIngresar {
   background-color: #007BFF;
   color: white;
-  padding: 10px 20px;
+  padding: 20px 30px;
   border: none;
   border-radius: 5px;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 16px;
+  transition: 0.5s;
 }
 
-.redirigirlogin:hover {
+.redirigirIngresar:hover {
   background-color: #0056b3;
+  transform: translateY(-5px);
 }
 
 .redirigirRegistro {
   background-color: #007BFF;
   color: white;
-  padding: 10px 20px;
+  padding: 20px 30px;
   border: none;
   border-radius: 5px;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 16px;
+  transition: 0.5s;
 }
 
 .redirigirRegistro:hover {
   background-color: #0056b3;
+  transform: translateY(-5px);
 }
 </style>
+
+<script>
+export default {
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: ''
+    };
+  },
+
+  methods: {
+    redirigirIngresar() {
+      this.$router.push('/ingresar');
+
+    },
+    redirigirRegistro() {
+      this.$router.push('/Registro');
+    }
+  }
+};
+
+definePageMeta({
+  layout: "blank",
+})
+</script>
