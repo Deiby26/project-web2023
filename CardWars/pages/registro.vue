@@ -115,7 +115,7 @@ export default {
         json["email"] = this.email;
         json["password"] = this.password;
         localStorage.setItem('JSON', JSON.stringify(json));
-        this.$router.push('/Login');
+        this.$router.push('/ingresar');
       } else {
         window.alert("Las contraseñas no coinciden")
       }

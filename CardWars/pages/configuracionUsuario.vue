@@ -1,8 +1,9 @@
 <template>
     <center>
         <form @submit="submitconfig">
-            <button type="submit" @click="showInfo = true">Leer</button>
+            <button type="submit" @click="showInfo = true" class="btn-leer">Leer</button>
         </form>
+        <br>
         <button type="button" @click="showForm = true" class="crudupdate">Modificar</button><br><br>
         <button type="button" @click="crudeliminar" class="crudeliminar">Eliminar Usuario</button><br><br>
         <div class="nombre-local-container" v-show="showInfo">
@@ -88,6 +89,17 @@ border-radius: 5px;
 cursor: pointer;
 font-size: 16px;
 }
+
+.btn-leer {
+    background-color: #007BFF;
+    color: white; 
+    border: none; 
+    padding: 10px 20px;
+    cursor: pointer; 
+    border-radius: 10px; 
+}
+
+
 </style>
 
 <script>
