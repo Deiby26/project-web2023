@@ -22,6 +22,25 @@ const createUser = async (userData) => {
   return { id: user._id, username: user.username, email: user.email };
 };
 
+const loginUser = async (username, email, password) => {
+  // Find the user by email
+  const userinDatabase = await User.findOne({ email });
+  const usernameRegistered = await User.findOne({ username });
+
+  if (!userinDatabase || !usernameRegistered) {
+    throw new Error("User not found");
+  }
+
+  // Compare provided password with the hashed password in the database
+  const isMatch = await bcrypt.compare(password, userinDatabase.password);
+  if (!isMatch) {
+    throw new Error("Invalid password");
+  }
+
+  return userinDatabase; // Or whatever data you want to return (excluding password)
+};
+
 module.exports = {
   createUser,
+  loginUser,
 };

@@ -16,4 +16,6 @@ router.post(
   userController.signUp
 );
 
+router.post("/ingresar", userController.login);
+
 module.exports = router;
