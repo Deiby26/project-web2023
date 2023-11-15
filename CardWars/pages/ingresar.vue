@@ -2,17 +2,39 @@
   <center>
     <div class="container">
       <div class="col-2">
-        <div class="styled-div"><br>
-          <form @submit="submitlogin"><br>
-            <p style="font-size: 25px;  color: white;">Usuario</p>
-            <input id="Usuario" type="text" placeholder="Ingresa tu usuario" v-model="usernamel" required>
-            <p style="font-size: 25px;  color: white;">Correo electrónico</p>
-            <input id="Correo" type="email" placeholder="Ingresa tu correo electrónico" v-model="emaill" required>
-            <p style="font-size: 25px;  color: white;">Contraseña</p>
-            <input id="Contra" type="password" placeholder="Ingresa tu contraseña" v-model="passwordl" required><br>
-            <button id="Ingresar" type="submit">Ingresar</button><br><br>
+        <div class="styled-div">
+          <br />
+          <form @submit="submitlogin">
+            <br />
+            <p style="font-size: 25px; color: white">Usuario</p>
+            <input
+              id="username"
+              type="text"
+              placeholder="Ingresa tu usuario"
+              v-model="username"
+              required
+            />
+            <p style="font-size: 25px; color: white">Correo electrónico</p>
+            <input
+              id="email"
+              type="email"
+              placeholder="Ingresa tu correo electrónico"
+              v-model="email"
+              required
+            />
+            <p style="font-size: 25px; color: white">Contraseña</p>
+            <input
+              id="password"
+              type="password"
+              placeholder="Ingresa tu contraseña"
+              v-model="password"
+              required
+            /><br />
+            <button id="Ingresar" type="submit">Ingresar</button><br /><br />
           </form>
-          <button type="submit" @click="regresar" id="regresar">Regresar</button>
+          <button type="submit" @click="regresar" id="regresar">
+            Regresar
+          </button>
         </div>
       </div>
     </div>
@@ -27,15 +49,15 @@
   border-radius: 20px;
 }
 
-#Usuario{
+#Usuario {
   font-size: 20px;
 }
 
-#Correo{
+#Correo {
   font-size: 20px;
 }
 
-#Contra{
+#Contra {
   font-size: 20px;
 }
 
@@ -50,7 +72,7 @@
   transition: 0.5s;
 }
 
-#Ingresar:hover{
+#Ingresar:hover {
   transform: translateY(-5px);
 }
 
@@ -71,7 +93,8 @@
 }
 </style>
 
-<script >
+<script>
+import userService from "@/services/userService";
 definePageMeta({
   layout: "blank",
 });
@@ -79,70 +102,34 @@ definePageMeta({
 export default {
   data() {
     return {
-      usernamel: '',
-      emaill: '',
-      passwordl: ''
+      username: "",
+      email: "",
+      password: "",
     };
   },
 
   methods: {
-    submitlogin(event) {
+    async submitlogin(event) {
       event.preventDefault();
-      const contenedor = [];
+      const credentials = {
+        username: this.username,
+        email: this.email,
+        password: this.password,
+      };
 
-      var objetoRecuperado = JSON.parse(localStorage.getItem('JSON'));
-      const nombrelogin = this.usernamel;
-      const nombrelocalstorage = objetoRecuperado["username"];
-
-      const sonIgualesnombre = nombrelogin === nombrelocalstorage;
-      if (sonIgualesnombre == true) {
-        contenedor.push(true);
-      } else {
-        contenedor.push(false);
-      }
-
-      const correol = this.emaill;
-      const correolocalstorage = objetoRecuperado["email"];
-
-      const sonIgualescorreo = correol === correolocalstorage;
-      if (sonIgualescorreo == true) {
-        contenedor.push(true);
-      } else {
-        contenedor.push(false);
-      }
-
-      const contral = this.passwordl;
-      const passwordlocalstorage = objetoRecuperado["password"];
-      const sonIgualescontra = contral === passwordlocalstorage;
-
-      if (sonIgualescontra == true) {
-        contenedor.push(true);
-      } else {
-        contenedor.push(false);
-      }
-
-      console.log(contenedor)
-      var contador = 0
-      for (var i = 0; i < contenedor.length; i++) {
-        var elemento = contenedor[i];
-        if (elemento === true) {
-          contador++;
-        } else {
-          continue
-        }
-      }
-      if (contador === 3) {
-        window.alert("INCIO DE SESIÓN")
-        this.$router.push('/paginaPrincipal');
-      } else {
-        window.alert("LAS CREDECIALES NO COINCIDEN")
+      try {
+        const userData = await userService.login(credentials);
+        console.log("Login successful:", userData);
+        this.$router.push("/paginaPrincipal");
+      } catch (error) {
+        console.error(error.message);
+        window.alert(error.message || "Login failed");
       }
     },
 
-    regresar(){
-      this.$router.push('/');
-    }
+    regresar() {
+      this.$router.push("/");
+    },
   },
 };
-
 </script>
