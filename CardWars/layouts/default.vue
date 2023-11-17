@@ -2,7 +2,7 @@
   <div class="privado">
     <nav class="navbar">
       <div class="logo">
-        <img src="logo.png" alt="Logo" />
+        <img src="/logo.png" alt="Logo" />
       </div>
 
       <ul>
