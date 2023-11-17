@@ -51,7 +51,7 @@
 
             <div class="form-group">
               <label for="cbox2" id="TermsyCond">Acepto los términos y condiciones</label>
-              <input type="checkbox" id="cbox2" value="second_checkbox" v-model="termsAccepted" required />
+              <input type="checkbox" id="cbox2" value="second_checkbox" v-model="termsChecked" required />
               <a href="/terminosycondiciones.pdf" style="font-size: 20px; color: white" target="_blank"
                 id="Tratamiento">Tratamiento de datos personales (PDF)</a>
             </div>

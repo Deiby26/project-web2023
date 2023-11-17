@@ -85,7 +85,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin: 30px;
 }
 
 .card-container-single {

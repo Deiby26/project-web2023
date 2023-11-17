@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 id="Mis-Memes">Mis Memes</h1>
+    <nuxt-link to="/MemePage" id="Crear-Nuevo-Meme">Crear nuevo meme</nuxt-link>
     <div class="meme-container">
       <div v-for="(meme, index) in savedMemes" :key="index" class="meme-item">
 
@@ -77,6 +78,14 @@
   margin-top: 10px;
   display: flex;
   align-items: center;
+}
+#Crear-Nuevo-Meme {
+  font-family: sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
 }
 
 .meme-content {

@@ -62,6 +62,7 @@
   font-size: 20px;
   cursor: pointer;
   transition: 0.5s;
+  width: 160px;
 }
 
 .redirigirIngresar:hover {
@@ -78,6 +79,7 @@
   font-size: 20px;
   cursor: pointer;
   transition: 0.5s;
+  width: 160px;
 }
 
 .redirigirRegistro:hover {
